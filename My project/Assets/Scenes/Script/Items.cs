@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public abstract class InteractiveItems : MonoBehaviour
 {
     [Header("basic Items")]
@@ -21,3 +22,4 @@ public abstract class InteractiveItems : MonoBehaviour
     // Start is called before the first frame update
 
 }
+*/
