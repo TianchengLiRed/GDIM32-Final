@@ -21,4 +21,5 @@ Put your individual final Devlog here.
 Put your individual final Devlog here.
 
 ## Open-Source Assets
-Cite any open-source assets here. Put them in a LIST, and use correctly formatted LINKS.
+
+[Low-Poly Office Set #1 [+140 Models] [VNB]](https://assetstore.unity.com/packages/3d/props/low-poly-office-set-1-140-models-vnb-327126)
