@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -13,7 +12,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask interactLayer;
     [SerializeField] private float detectRange = 3f;//检测范围
-    private List<Interactable> interObjs = new List<Interactable>();//范围内
+    private Interactable currentInteractable;
+
+    [Header("GUI Prompt")]
+    [SerializeField] private Vector2 guiPromptSize = new Vector2(180f, 36f);
+    [SerializeField] private Vector2 guiPromptOffset = new Vector2(0f, -80f);
+    [SerializeField] private GUIStyle guiPromptStyle;
 
     private Rigidbody rb;
     private Animator animator;
@@ -33,10 +37,9 @@ public class PlayerController : MonoBehaviour
         UpdateAnimator();
         InterRange();        
 
-        if(Input.GetMouseButtonDown(0)){
-            ClickInteract();
-            AudioManager.Instance.PlayClick();
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            TryInteractCurrent();
         }
 
     }
@@ -79,46 +82,73 @@ public class PlayerController : MonoBehaviour
 
    private void InterRange()
     {
-        // 上一帧高亮的物体全部熄灭
-        foreach (var obj in interObjs)
-        {
-            if (obj != null) obj.SetHighlight(false);
-        }
-        interObjs.Clear();
+        Interactable nextInteractable = null;
+        float closestSqr = float.MaxValue;
+        HashSet<Interactable> candidates = new HashSet<Interactable>();
         // 扫描玩家周围 detectRange 距离内的所有碰撞体
         Collider[] hits = Physics.OverlapSphere(transform.position, detectRange, interactLayer);
         foreach (var hit in hits)
         {
             //如果是interactable
-            Interactable interactable = hit.GetComponent<Interactable>();
+            Interactable interactable = hit.GetComponentInParent<Interactable>();
             if (interactable != null)
             {
-               //高亮
-                interactable.SetHighlight(true);
-                interObjs.Add(interactable);
+                candidates.Add(interactable);
             }
+        }
+
+        foreach (var interactable in candidates)
+        {
+            float sqrDist = (interactable.transform.position - transform.position).sqrMagnitude;
+            if (sqrDist < closestSqr)
+            {
+                closestSqr = sqrDist;
+                nextInteractable = interactable;
+            }
+        }
+
+        if (currentInteractable != nextInteractable)
+        {
+            if (currentInteractable != null) currentInteractable.SetHighlight(false);
+            currentInteractable = nextInteractable;
+            if (currentInteractable != null) currentInteractable.SetHighlight(true);
         }
     }
 
-    private void ClickInteract()
+    private void TryInteractCurrent()
     {
-        // 从摄像机发射一条射线到鼠标位置
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        //满足layer
-        if (Physics.Raycast(ray, out hit, 100f, interactLayer))
+        // 对话进行中时，E 键用于推进对话，不触发场景交互
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsInDialogue)
         {
-            //满足交互
-            Interactable clickedObj = hit.collider.GetComponent<Interactable>();
+            return;
+        }
 
-            if (clickedObj != null && interObjs.Contains(clickedObj))
-            {
-                clickedObj.OnInteract();
-            }
-            else if (clickedObj != null)
-            {
-                Debug.Log("看见了，但够不到（超出交互范围）");
-            }
+        if (currentInteractable == null) return;
+
+        currentInteractable.OnInteract();
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayClick();
+        }
+    }
+
+    private void OnGUI()
+    {
+        if (currentInteractable == null) return;
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsInDialogue) return;
+
+        float x = (Screen.width - guiPromptSize.x) * 0.5f + guiPromptOffset.x;
+        float y = Screen.height - guiPromptSize.y + guiPromptOffset.y;
+        Rect rect = new Rect(x, y, guiPromptSize.x, guiPromptSize.y);
+
+        if (guiPromptStyle != null)
+        {
+            GUI.Label(rect, currentInteractable.PromptText, guiPromptStyle);
+        }
+        else
+        {
+            GUI.Box(rect, currentInteractable.PromptText);
         }
     }
 
