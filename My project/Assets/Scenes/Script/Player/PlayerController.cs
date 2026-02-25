@@ -32,7 +32,11 @@ public class PlayerController : MonoBehaviour
         Jump();
         UpdateAnimator();
         InterRange();
-        
+        if (DialogueManager.Instance.IsInDialogue)
+        {
+            return; // 不允许移动
+        }         
+
         if(Input.GetKeyDown(KeyCode.E)){
             ClickInteract();
             AudioManager.Instance.PlayClick();

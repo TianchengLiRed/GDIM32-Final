@@ -2,18 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class DialogueUI : MonoBehaviour
+public class UIManager: MonoBehaviour
 {
+    
     [SerializeField] private GameObject dialogPanel;
+    [SerializeField] private GameObject leftPanel;
+    [SerializeField] private GameObject rightPanel;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI contentText;
 
     void Start()
     {
         dialogPanel.SetActive(false);
+        leftPanel.SetActive(false);
+        rightPanel.SetActive(false);
         // 订阅事件
         DialogueManager.Instance.OnLineStarted += ShowLine;//收到通知展示UI
         DialogueManager.Instance.OnDialogueEnded += HideUI;//收到通知关闭展示
+        TaskChoose.Instance.OnChooseLeft += ShowLeftPanel;
+        TaskChoose.Instance.OnChooseRight += ShowRightPanel;
+
+
     }
 
     void Update()
@@ -39,6 +48,16 @@ public class DialogueUI : MonoBehaviour
     public void OnClickNext()
     {
         DialogueManager.Instance.DisplayNextLine();
+    }
+
+    private void ShowLeftPanel()
+    {
+        leftPanel.SetActive(true);
+    }
+
+    private void ShowRightPanel()
+    {
+        rightPanel.SetActive(true);
     }
 }
 
