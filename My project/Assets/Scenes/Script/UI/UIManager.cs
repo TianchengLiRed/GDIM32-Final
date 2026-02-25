@@ -27,7 +27,9 @@ public class UIManager: MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E)
+            && DialogueManager.Instance != null
+            && DialogueManager.Instance.IsInDialogue)
         {
             OnClickNext();
 
@@ -60,4 +62,3 @@ public class UIManager: MonoBehaviour
         rightPanel.SetActive(true);
     }
 }
-

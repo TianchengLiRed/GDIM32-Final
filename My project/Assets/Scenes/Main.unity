@@ -2354,6 +2354,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa2e49fbb9cf4c21b163d91ae6d8a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  includeChildRenderers: 1
+  promptText: Press E
+  promptOffset: {x: 0, y: 2, z: 0}
   myDialogue: {fileID: 11400000, guid: a843954e5ace74a06abb191c6c5f58ed, type: 2}
   Player: {fileID: 653885686}
   rotationSpeed: 5
@@ -7520,6 +7524,75 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   detectRange: 3
+  guiPromptSize: {x: 180, y: 36}
+  guiPromptOffset: {x: 0, y: -80}
+  guiPromptStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!4 &653885686
 Transform:
   m_ObjectHideFlags: 0
@@ -8458,6 +8531,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa2e49fbb9cf4c21b163d91ae6d8a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  includeChildRenderers: 1
+  promptText: Press E
+  promptOffset: {x: 0, y: 2, z: 0}
   myDialogue: {fileID: 11400000, guid: a843954e5ace74a06abb191c6c5f58ed, type: 2}
   Player: {fileID: 0}
   rotationSpeed: 5
@@ -12837,6 +12914,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b925cf4312e24a40bb48d617c153a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  includeChildRenderers: 1
+  promptText: Press E
+  promptOffset: {x: 0, y: 2, z: 0}
 --- !u!65 &1131105064
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14283,6 +14364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139419c3cccfc4d6384d992a74830129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  includeChildRenderers: 1
+  promptText: Press E
+  promptOffset: {x: 0, y: 2, z: 0}
   myDialogue: {fileID: 11400000, guid: a843954e5ace74a06abb191c6c5f58ed, type: 2}
   player: {fileID: 0}
   rotationSpeed: 5
@@ -15228,6 +15313,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c456c60a66645a8aab5d99e80c8cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  includeChildRenderers: 1
+  promptText: Press E
+  promptOffset: {x: 0, y: 2, z: 0}
   noteContent: "\u8FD9\u662F\u4E00\u5C01\u795E\u79D8\u7684\u4FE1\u4EF6..."
 --- !u!4 &1313785247 stripped
 Transform:
@@ -23261,6 +23350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa2e49fbb9cf4c21b163d91ae6d8a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  includeChildRenderers: 1
+  promptText: Press E
+  promptOffset: {x: 0, y: 2, z: 0}
   myDialogue: {fileID: 11400000, guid: 14cfe4e4ad6314d799a7d80e1ef6f3ee, type: 2}
   Player: {fileID: 0}
   rotationSpeed: 5
