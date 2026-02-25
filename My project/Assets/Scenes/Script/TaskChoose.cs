@@ -16,8 +16,11 @@ public class TaskChoose : MonoBehaviour
 
     public event Action OnChooseLeft; 
     public event Action OnChooseRight; 
-    private bool intasking = false;
     // Start is called before the first frame update
+    void Awake()
+{
+    Instance = this;
+}
     void Start()
     {
         choosePanel.SetActive(false);
