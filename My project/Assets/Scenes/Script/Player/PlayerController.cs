@@ -32,8 +32,10 @@ public class PlayerController : MonoBehaviour
         Jump();
         UpdateAnimator();
         InterRange();
-        if(Input.GetMouseButtonDown(0)){
+        
+        if(Input.GetKeyDown(KeyCode.E)){
             ClickInteract();
+            AudioManager.Instance.PlayClick();
 
         }
 

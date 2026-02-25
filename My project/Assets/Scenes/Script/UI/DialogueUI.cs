@@ -16,6 +16,16 @@ public class DialogueUI : MonoBehaviour
         DialogueManager.Instance.OnDialogueEnded += HideUI;//收到通知关闭展示
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            OnClickNext();
+
+        }
+        
+    }
+
     private void ShowLine(DialogueLine line)//展示对应line的文字和name
     {
         dialogPanel.SetActive(true);

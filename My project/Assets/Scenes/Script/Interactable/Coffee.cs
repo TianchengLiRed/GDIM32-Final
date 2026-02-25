@@ -7,6 +7,7 @@ public class Coffee : Interactable
     public override void OnInteract()
     {
         TimerManager.Instance.StartTimer(30);
+        AudioManager.Instance.PlayerDrink();
 
     }
 }
