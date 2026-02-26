@@ -6,8 +6,15 @@ public class Boss : Interactable
     [SerializeField] private Transform player;
     [SerializeField] private float rotationSpeed = 5f;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        TryResolvePlayer();
+    }
+
     private void Update()
     {
+        if (player == null) TryResolvePlayer();
         NpcLookAtPlayer();
     }
 
@@ -56,6 +63,24 @@ public class Boss : Interactable
         if (TaskChoose.Instance != null)
         {
             TaskChoose.Instance.ActivePanel();
+        }
+    }
+
+    private void TryResolvePlayer()
+    {
+        if (player != null) return;
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            player = playerObj.transform;
+            return;
+        }
+
+        PlayerController controller = FindObjectOfType<PlayerController>();
+        if (controller != null)
+        {
+            player = controller.transform;
         }
     }
 }

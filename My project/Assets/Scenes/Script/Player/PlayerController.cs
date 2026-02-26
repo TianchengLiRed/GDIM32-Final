@@ -9,31 +9,45 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float groundCheckDistance = 0.1f;
+    [SerializeField] private float moveAcceleration = 12f;
 
     [SerializeField] private LayerMask interactLayer;
     [SerializeField] private float detectRange = 3f;//检测范围
     private Interactable currentInteractable;
 
     [Header("GUI Prompt")]
-    [SerializeField] private Vector2 guiPromptSize = new Vector2(180f, 36f);
+    [SerializeField] private Vector2 guiPromptSize = new Vector2(380f, 78f);
     [SerializeField] private Vector2 guiPromptOffset = new Vector2(0f, -80f);
     [SerializeField] private GUIStyle guiPromptStyle;
+    [SerializeField] private int guiPromptFontSize = 36;
+    [SerializeField] private Color guiPromptTextColor = new Color(1f, 0.95f, 0.2f, 1f);
+    [SerializeField] private Color guiPromptOutlineColor = Color.black;
+    [SerializeField] private Color guiPromptBgColor = new Color(0f, 0f, 0f, 0.7f);
+    [SerializeField] private Color guiPromptBorderColor = new Color(1f, 0.9f, 0.2f, 0.95f);
+    [SerializeField] private float guiPromptPulseSpeed = 3f;
+    [SerializeField] private float guiPromptPulseStrength = 0.25f;
 
     private Rigidbody rb;
     private Animator animator;
     private bool IsGrounded;
+    private Vector2 moveInput;
+    private bool jumpQueued;
+    private GUIStyle runtimePromptStyle;
+    private GUIStyle mergedPromptStyle;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
     void Update()
     {
+        ReadInput();
         CheckGround();
-        Move();
-        Jump();
         UpdateAnimator();
         InterRange();        
 
@@ -44,27 +58,55 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        Move();
+        Jump();
+    }
+
+    private void ReadInput()
+    {
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
+        moveInput = Vector2.ClampMagnitude(moveInput, 1f);
+
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
+        {
+            jumpQueued = true;
+        }
+    }
+
     void Move()
     {
-       float h = Input.GetAxis("Horizontal");
-       float v = Input.GetAxis("Vertical");
-
         float speed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
 
-        Vector3 move = transform.forward * v + transform.right * h;
+        Vector3 move = transform.forward * moveInput.y + transform.right * moveInput.x;
+        Vector3 targetHorizontalVelocity = move * speed;
+        Vector3 currentHorizontalVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        Vector3 nextHorizontalVelocity = Vector3.Lerp(
+            currentHorizontalVelocity,
+            targetHorizontalVelocity,
+            moveAcceleration * Time.fixedDeltaTime
+        );
 
-        rb.velocity = move * speed + new Vector3(0, rb.velocity.y, 0);
+        rb.velocity = new Vector3(nextHorizontalVelocity.x, rb.velocity.y, nextHorizontalVelocity.z);
     }
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
+        if (jumpQueued && IsGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            jumpQueued = false;
 
             if (animator != null)
             {
                 animator.SetTrigger("Jump");
             }
+        }
+
+        if (!IsGrounded)
+        {
+            jumpQueued = false;
         }
     }
     void CheckGround()
@@ -138,18 +180,79 @@ public class PlayerController : MonoBehaviour
         if (currentInteractable == null) return;
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsInDialogue) return;
 
+        EnsurePromptStyle();
+
         float x = (Screen.width - guiPromptSize.x) * 0.5f + guiPromptOffset.x;
         float y = Screen.height - guiPromptSize.y + guiPromptOffset.y;
         Rect rect = new Rect(x, y, guiPromptSize.x, guiPromptSize.y);
+        string displayText = currentInteractable.PromptText;
 
-        if (guiPromptStyle != null)
+        float pulse01 = 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * guiPromptPulseSpeed);
+        float pulseMul = Mathf.Lerp(1f - guiPromptPulseStrength, 1f, pulse01);
+
+        Color bgColor = guiPromptBgColor;
+        bgColor.a *= pulseMul;
+        DrawRect(rect, bgColor);
+        DrawRect(new Rect(rect.x - 2f, rect.y - 2f, rect.width + 4f, 2f), guiPromptBorderColor);
+        DrawRect(new Rect(rect.x - 2f, rect.yMax, rect.width + 4f, 2f), guiPromptBorderColor);
+        DrawRect(new Rect(rect.x - 2f, rect.y, 2f, rect.height), guiPromptBorderColor);
+        DrawRect(new Rect(rect.xMax, rect.y, 2f, rect.height), guiPromptBorderColor);
+
+        GUIStyle effectiveStyle = GetEffectivePromptStyle();
+        DrawOutlinedLabel(rect, displayText, effectiveStyle, guiPromptOutlineColor, 2f);
+    }
+
+    private void EnsurePromptStyle()
+    {
+        if (runtimePromptStyle != null) return;
+
+        runtimePromptStyle = new GUIStyle(GUI.skin.label);
+        runtimePromptStyle.alignment = TextAnchor.MiddleCenter;
+        runtimePromptStyle.fontStyle = FontStyle.Bold;
+        runtimePromptStyle.fontSize = guiPromptFontSize;
+        runtimePromptStyle.normal.textColor = guiPromptTextColor;
+        runtimePromptStyle.richText = true;
+    }
+
+    private GUIStyle GetEffectivePromptStyle()
+    {
+        if (guiPromptStyle == null) return runtimePromptStyle;
+
+        if (mergedPromptStyle == null)
         {
-            GUI.Label(rect, currentInteractable.PromptText, guiPromptStyle);
+            mergedPromptStyle = new GUIStyle(guiPromptStyle);
         }
-        else
-        {
-            GUI.Box(rect, currentInteractable.PromptText);
-        }
+
+        mergedPromptStyle.alignment = TextAnchor.MiddleCenter;
+        mergedPromptStyle.fontStyle = FontStyle.Bold;
+        mergedPromptStyle.fontSize = guiPromptFontSize;
+        mergedPromptStyle.normal.textColor = guiPromptTextColor;
+        mergedPromptStyle.hover.textColor = guiPromptTextColor;
+        mergedPromptStyle.active.textColor = guiPromptTextColor;
+        mergedPromptStyle.focused.textColor = guiPromptTextColor;
+        return mergedPromptStyle;
+    }
+
+    private void DrawOutlinedLabel(Rect rect, string text, GUIStyle style, Color outlineColor, float outlineSize)
+    {
+        Color oldColor = GUI.color;
+
+        GUI.color = outlineColor;
+        GUI.Label(new Rect(rect.x - outlineSize, rect.y, rect.width, rect.height), text, style);
+        GUI.Label(new Rect(rect.x + outlineSize, rect.y, rect.width, rect.height), text, style);
+        GUI.Label(new Rect(rect.x, rect.y - outlineSize, rect.width, rect.height), text, style);
+        GUI.Label(new Rect(rect.x, rect.y + outlineSize, rect.width, rect.height), text, style);
+
+        GUI.color = oldColor;
+        GUI.Label(rect, text, style);
+    }
+
+    private void DrawRect(Rect rect, Color color)
+    {
+        Color oldColor = GUI.color;
+        GUI.color = color;
+        GUI.DrawTexture(rect, Texture2D.whiteTexture);
+        GUI.color = oldColor;
     }
 
     private void OnDrawGizmos()
