@@ -11,17 +11,21 @@ public class DialogueManager : MonoBehaviour
     public event Action OnDialogueEnded;            // 当对话结束
 
     private Queue<DialogueLine> _lineQueue = new Queue<DialogueLine>();
+    private Action _onDialogueCompleted;
     public bool IsInDialogue { get; private set; }
 
     void Awake() => Instance = this;
 
    //对话开始
-    public void StartDialogue(DialogueData data)
+    public void StartDialogue(DialogueData data, Action onCompleted = null)
     {
         if (data == null) return;
 
+        if (IsInDialogue) return;
+
         _lineQueue.Clear();
         foreach (var line in data.lines) _lineQueue.Enqueue(line);
+        _onDialogueCompleted = onCompleted;
 
         IsInDialogue = true;
         DisplayNextLine();
@@ -42,7 +46,20 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         IsInDialogue = false;
+        Action completed = _onDialogueCompleted;
+        _onDialogueCompleted = null;
         OnDialogueEnded?.Invoke();//事件end通知
         Debug.Log("对话结束");
+
+        if (completed != null)
+        {
+            StartCoroutine(InvokeCompletedNextFrame(completed));
+        }
+    }
+
+    private IEnumerator InvokeCompletedNextFrame(Action completed)
+    {
+        yield return null;
+        completed?.Invoke();
     }
 }
