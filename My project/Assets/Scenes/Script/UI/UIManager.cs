@@ -19,6 +19,7 @@ public class UIManager: MonoBehaviour
         // 订阅事件
         DialogueManager.Instance.OnLineStarted += ShowLine;//收到通知展示UI
         DialogueManager.Instance.OnDialogueEnded += HideUI;//收到通知关闭展示
+        TaskChoose.Instance.OnChoicePanelShown += HideTaskResultPanels;
         TaskChoose.Instance.OnChooseLeft += ShowLeftPanel;
         TaskChoose.Instance.OnChooseRight += ShowRightPanel;
 
@@ -29,7 +30,7 @@ public class UIManager: MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E)
             && DialogueManager.Instance != null
-            && DialogueManager.Instance.IsInDialogue)
+            && DialogueManager.Instance.CanAdvanceDialogue)
         {
             OnClickNext();
 
@@ -54,11 +55,19 @@ public class UIManager: MonoBehaviour
 
     private void ShowLeftPanel()
     {
+        HideTaskResultPanels();
         leftPanel.SetActive(true);
     }
 
     private void ShowRightPanel()
     {
+        HideTaskResultPanels();
         rightPanel.SetActive(true);
+    }
+
+    private void HideTaskResultPanels()
+    {
+        leftPanel.SetActive(false);
+        rightPanel.SetActive(false);
     }
 }

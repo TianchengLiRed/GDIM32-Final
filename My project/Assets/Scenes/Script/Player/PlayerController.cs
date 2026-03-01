@@ -165,6 +165,11 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (TaskChoose.Instance != null && TaskChoose.Instance.IsChoicePanelOpen)
+        {
+            return;
+        }
+
         if (currentInteractable == null) return;
 
         currentInteractable.OnInteract();
@@ -179,6 +184,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentInteractable == null) return;
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsInDialogue) return;
+        if (TaskChoose.Instance != null && TaskChoose.Instance.IsChoicePanelOpen) return;
 
         EnsurePromptStyle();
 
