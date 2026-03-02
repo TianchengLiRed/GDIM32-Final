@@ -3424,15 +3424,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   includeChildRenderers: 1
   ringColor: {r: 1, g: 0.9, b: 0.2, a: 1}
-  ringWidth: 0.08
+  ringWidth: 0.04
   ringPadding: 0.2
-  ringYOffset: 0.12
+  ringYOffset: 0.1
   ringSegments: 48
   promptText: Press E
   promptOffset: {x: 0, y: 2, z: 0}
   player: {fileID: 0}
   rotationSpeed: 5
-  myDialogue: {fileID: 11400000, guid: a843954e5ace74a06abb191c6c5f58ed, type: 2}
+  myDialogue: {fileID: 0}
 --- !u!95 &167066310
 Animator:
   serializedVersion: 5
@@ -10422,7 +10422,7 @@ GameObject:
   - component: {fileID: 653885687}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10497,7 +10497,7 @@ MonoBehaviour:
   interactLayer:
     serializedVersion: 2
     m_Bits: 64
-  detectRange: 3
+  detectRange: 1.5
   guiPromptSize: {x: 180, y: 36}
   guiPromptOffset: {x: 0, y: -80}
   guiPromptStyle:
@@ -10567,7 +10567,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  guiPromptFontSize: 36
+  guiPromptFontSize: 28
   guiPromptTextColor: {r: 1, g: 0.95, b: 0.2, a: 1}
   guiPromptOutlineColor: {r: 0, g: 0, b: 0, a: 1}
   guiPromptBgColor: {r: 0, g: 0, b: 0, a: 0.7}
@@ -14875,9 +14875,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb72cf98c71846c7bcfc99ce096bd43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSensitivity: 50
-  maxSensitivity: 400
-  sensitivity: 180
+  minSensitivity: 100
+  maxSensitivity: 600
+  sensitivity: 600
   lookSmoothTime: 0.03
   lockCursor: 1
   player: {fileID: 653885686}
@@ -17696,7 +17696,7 @@ MonoBehaviour:
   ringColor: {r: 1, g: 0.9, b: 0.2, a: 1}
   ringWidth: 0.08
   ringPadding: 0.2
-  ringYOffset: 0.12
+  ringYOffset: 0.03
   ringSegments: 48
   promptText: Press E
   promptOffset: {x: 0, y: 2, z: 0}
@@ -19670,14 +19670,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266198235}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3, y: 0, z: 8.279724}
+  m_LocalRotation: {x: -0, y: 0.9999977, z: -0, w: 0.0021732375}
+  m_LocalPosition: {x: 0, y: 0, z: 9.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1614743346}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.751, z: 0}
 --- !u!114 &1266198240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19692,9 +19692,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   includeChildRenderers: 1
   ringColor: {r: 1, g: 0.9, b: 0.2, a: 1}
-  ringWidth: 0.08
+  ringWidth: 0.04
   ringPadding: 0.2
-  ringYOffset: 0.12
+  ringYOffset: 0.17
   ringSegments: 48
   promptText: Press E
   promptOffset: {x: 0, y: 2, z: 0}
@@ -20766,7 +20766,7 @@ MonoBehaviour:
   ringColor: {r: 1, g: 0.9, b: 0.2, a: 1}
   ringWidth: 0.08
   ringPadding: 0.2
-  ringYOffset: 0.12
+  ringYOffset: 0.03
   ringSegments: 48
   promptText: Press E
   promptOffset: {x: 0, y: 2, z: 0}
@@ -27342,6 +27342,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 611590c46e3e47d4b9eb12aab6295a68, type: 3}
+--- !u!1 &1787295389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4713524891515353502, guid: f814b122f2e1c274389d5096984dbd52, type: 3}
+  m_PrefabInstance: {fileID: 1887089349}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1787568436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29536,13 +29541,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4713524891515353502, guid: f814b122f2e1c274389d5096984dbd52, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1887089353}
   m_SourcePrefab: {fileID: 100100000, guid: f814b122f2e1c274389d5096984dbd52, type: 3}
 --- !u!4 &1887089350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2635214591952068044, guid: f814b122f2e1c274389d5096984dbd52, type: 3}
   m_PrefabInstance: {fileID: 1887089349}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1887089353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787295389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b925cf4312e24a40bb48d617c153a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeChildRenderers: 1
+  ringColor: {r: 1, g: 0.9, b: 0.2, a: 1}
+  ringWidth: 0.04
+  ringPadding: 0.2
+  ringYOffset: 0.12
+  ringSegments: 48
+  promptText: "\u6309 E \u4EA4\u4E92"
+  promptOffset: {x: 0, y: 2, z: 0}
 --- !u!1001 &1887780157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32987,8 +33015,6 @@ SceneRoots:
   - {fileID: 1131105067}
   - {fileID: 428727328}
   - {fileID: 636161614}
-  - {fileID: 1989264380}
-  - {fileID: 749562018}
   - {fileID: 1266198239}
   - {fileID: 167066311}
   - {fileID: 1494339398}

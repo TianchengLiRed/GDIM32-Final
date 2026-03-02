@@ -3,7 +3,12 @@ guid: d3848a1125dc94abab09fca9c009d6f0
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - choosePanel: {fileID: 4894496227843180615, guid: 84b0150a6909f4711ae9b58ce51f4503, type: 3}
+  - left: {instanceID: 0}
+  - right: {instanceID: 0}
+  - dialogueLeft: {instanceID: 0}
+  - dialogueRight: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
