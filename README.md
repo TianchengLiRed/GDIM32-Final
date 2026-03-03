@@ -2,7 +2,9 @@
 ## Check-In
 
 ### Group Devlog
-Put your group Devlog here.
+A core feature in our game is allowing the player to interact with nearby objects in a clear way. To support this, we use spatial checks in PlayerController.cs. The code uses Physics.OverlapSphere() to detect colliders within a certain range around the player, and then compares the squared distance from the player to each interactable object to determine which one is the closest. This matters because our game includes multiple interactable objects in the same space, and we only want one object to be highlighted and available for interaction at a time.
+We also use raycasting as part of movement and player control. In PlayerController.cs, a downward Physics.Raycast() is used to check whether the player is grounded. This is important for making jump behavior work correctly, since the player should only be able to jump when touching the ground. Using a raycast here gives us a simple and reliable way to test that condition in 3D space.
+Vector math is also used in our NPC interaction system. In scripts such as LookAtPlayerInteractable.cs, NPCs and the Boss calculate the direction toward the player by subtracting positions and then rotating to face that direction. This helps conversations feel more natural, since the characters visually respond to the player’s position instead of staying fixed in one direction.
 
 ### Allen Hu
 
