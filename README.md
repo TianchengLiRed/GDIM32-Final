@@ -26,22 +26,28 @@ public event Action OnDialogueEnded;
 The DisplayNextLine() method is used to update the dialogue when the player clicks(Input.GetKeyDown(KeyCode.E). When a new dialogue begins OnLineStarted?.Invoke(nextLine); instruct the UIManager listener to update its text to the next line. The EndDialogue() method is used to end dialogue state. When dialogue ends OnDialogueEnded?.Invoke(); instruct the UIManager listener to close dialoguePanel.
 
 ##### UIManager, Dialogue Manager, TaskChoose
+
 UIManager class use to controll all UI features as a instance
+
 UIManager subscribed different event respond differently to different interactions
 DialogueManager.Instance.OnLineStarted += ShowLine;
 DialogueManager.Instance.OnDialogueEnded += HideUI;
 TaskChoose.Instance.OnChoicePanelShown += HideTaskResultPanels;
 TaskChoose.Instance.OnChooseLeft += ShowLeftPanel;
 TaskChoose.Instance.OnChooseRight += ShowRightPanel;
+
 Different methods are applied based on different events. when OnlineStarted?.Invoke(nextLine) called ShowLine(DialogueLine line) use TMP to Update UI information to current ScriptableObject nextline by nameText.text = line.name; contentText.text = line.content; OnDialogueEnded?.Invoke(); calls HideUI() to hide dialoguePanel, ShowLeftPanel() ShowrightPanel() HideTaskResultPanels();used to display different UIs in different events.
 
 ##### AudioManager
 AudioManager class use to controll audio play in different situations in the game as a instance
+
 public AudioClip clickSound; 
 public AudioClip hoverSound; 
 public AudioClip moveSound;
 public AudioClip drinkSound;,etc.
+
 The script stores a large number of aduioclips to play using different methods in corresponding situations. 
+
 public void PlayClick()
     {
         if (clickSound != null)
@@ -49,6 +55,7 @@ public void PlayClick()
     }
 public void PlayerDrink();
 public void PlayerMove();,etc.
+
 I only need to use AudioManager.Instance.PlayClick(); in other scripts to play the corresponding sound.
 
 ##### interaction system
