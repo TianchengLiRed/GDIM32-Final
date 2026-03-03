@@ -28,7 +28,7 @@ public class TaskFlowManager : MonoBehaviour
     [SerializeField] private bool requireCoffeeBeforeTask = true;
 
     [Header("Top Prompt")]
-    [SerializeField] private string coffeePromptMessage = "先去喝咖啡，准备开始工作";
+    [SerializeField] private string coffeePromptMessage = "Drink Coffee";
     [SerializeField] private Color promptTextColor = new Color(1f, 0.93f, 0.2f, 1f);
     [SerializeField] private int promptFontSize = 28;
     [SerializeField] private Vector2 promptBoxSize = new Vector2(760f, 84f);
