@@ -5,9 +5,10 @@ public class Boss : LookAtPlayerInteractable
     [SerializeField] private DialogueData myDialogue;
 
     private bool introDialoguePlayed = false;
-
+    [SerializeField] private Animator Animator;
     public override void OnInteract()
     {
+        Animator.SetBool("Istalking", true);
         if (TaskChoose.Instance != null && TaskChoose.Instance.IsChoicePanelOpen)
         {
             return;
@@ -36,5 +37,9 @@ public class Boss : LookAtPlayerInteractable
         {
             TaskChoose.Instance.ShowChoicePanel();
         }
+    }
+    public void StopTalking()
+    {
+        Animator.SetBool("istalking", false);
     }
 }
