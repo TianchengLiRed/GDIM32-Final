@@ -57,6 +57,9 @@ In PlayerController class i create Move() to controll players movement InterRang
 In CameraFollow class i use CameraChange() to  synchronize player's transform to camera to achieve first person view, and the camera's view is moved based on mouse movement.
 Created interactble class as parent inheritance that has Oninteract() different subclasses react differently during player interaction.
 SetHighlight() all objects turn yellow when the player gets close.
+
+I think the proposal is not detail enough, even though its helpful to reminds me what task i need to finish, however, there are still many details we need to confirm during the work, such as whether the toilet door can be opened, or the player's interaction logic. I changed my architecture plan by adding DialogueManager, because i aware that dialogue function is complex enough to create separately. I think I will add more detail in function description to make teammate have a clear understand of each function, also i will use trello to clear divison of labor, avoid confilct in code and encourage add more comments.
+
 ### Team Member Name 3
 Put your individual check-in Devlog here.
 
