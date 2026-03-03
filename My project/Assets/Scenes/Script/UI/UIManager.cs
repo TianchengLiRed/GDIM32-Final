@@ -4,18 +4,25 @@ using UnityEngine;
 using TMPro;
 public class UIManager: MonoBehaviour
 {
+    public static UIManager Instance;
     
     [SerializeField] private GameObject dialogPanel;
+    [SerializeField] private GameObject computerPanel;
     [SerializeField] private GameObject leftPanel;
     [SerializeField] private GameObject rightPanel;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI contentText;
 
+    void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         dialogPanel.SetActive(false);
         leftPanel.SetActive(false);
         rightPanel.SetActive(false);
+        computerPanel.SetActive(false);
         // 订阅事件
         DialogueManager.Instance.OnLineStarted += ShowLine;//收到通知展示UI
         DialogueManager.Instance.OnDialogueEnded += HideUI;//收到通知关闭展示
@@ -69,5 +76,29 @@ public class UIManager: MonoBehaviour
     {
         leftPanel.SetActive(false);
         rightPanel.SetActive(false);
+    }
+
+    public void OpenComputerPanel()
+    {
+        computerPanel.SetActive(true);
+         Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
+    }
+
+    public void Email()
+    {
+
+    }
+
+    public void Form()
+    {
+
+    }
+    public void Close()
+    {
+        computerPanel.SetActive(false);
+         Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = false;
+
     }
 }

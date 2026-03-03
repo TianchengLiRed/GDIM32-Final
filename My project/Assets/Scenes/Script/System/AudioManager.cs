@@ -3,8 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
+    
     // 单例实例
-    public static AudioManager Instance { get; private set; }
+    public static AudioManager Instance;
 
     [Header("Button Sounds")]
     // private AudioSource audioSource;
