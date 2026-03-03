@@ -69,9 +69,17 @@ SetHighlight() all objects turn yellow when the player gets close.
 
 Break down provide a crucial role for me to clarify my thoughts by break whole game in to different part so that I can know how should I build the game, like I wrote different manager that manage different functions separately and connect them through events. Just like what I did create AudioManager DialogueManager and UIManager to controll different function and connected by events like Onlinestarted?.Invoke(); I think the proposal is not detail enough, even though its helpful to reminds me what task i need to finish, however, there are still many details we need to confirm during the work, such as whether the toilet door can be opened, or the player's interaction logic. I changed my architecture plan by adding DialogueManager, because i aware that dialogue function is complex enough to create separately. I think I will add more detail in function description to make teammate have a clear understand of each function, also i will use trello to clear divison of labor, avoid confilct in code and encourage add more comments. 
 
-### Team Member Name 3
-Put your individual check-in Devlog here.
+### Yaokun Wan    
 
+At this stage of development, I was responsible for all of the art direction, character animation setup, and full scene construction inside Unity. Our team’s breakdown worked well because we clearly separated responsibilities that my teammates focusing heavily on the coding systems, and I handled the entire visual and environmental layer of the game.
+
+##### Character & Animations
+For character and animation work, I imported all player and NPC models into Unity and configured their rigs and Animator Controllers. For the player, I set up animation states including Idle, Walk, Run, and Talk, and connected them using Animator parameters to ensure smooth transitions during gameplay. For the Boss and co-worker, I configured Idle and Talk states. I also adjusted transition conditions (such as disabling “Has Exit Time” when necessary) to make animation switching more responsive. In addition, I wrote a script to rotate NPC GameObjects toward the player during interaction by updating their transform. rotation, which improves immersion during dialogue.
+
+##### Environment
+Beyond animation, I constructed the entire environment inside Unity. I sourced office and restroom assets compatible with the Built-in Render Pipeline and built the full playable layout, including walls, floors, ceilings, and furniture placement. At this stage, the environment is not just a blockout but a detailed and fully navigable map. I also designed and implemented multiple lighting setups in the scene. This includes floor lamps and desk lamps using Point Light, ceiling hanging lights using Spot Light, and restroom mirror lights using Point Light. I adjusted intensity, range, and placement to balance atmosphere and visibility. To support team workflow, I organized the Hierarchy by separating non-interactive props from interactable GameObjects. This made it easier for my teammates to quickly attach interaction scripts to objects like the printer or coffee machine without confusion.
+
+Looking back at our Proposal and W7 breakdown, it was actually very helpful for me personally. Before having a clear breakdown, I sometimes didn’t know where to start when building the project in Unity. The breakdown gave me a clearer structure of what needed to be done first, such as character setup, animation states, and environment construction. It also helped me measure progress more clearly. Instead of feeling like I was just placing objects randomly, I could check our breakdown and see whether I had completed a specific part of the plan. Having that structure made the building process more organized and less overwhelming.
 
 ## Final Submission
 ### Group Devlog
