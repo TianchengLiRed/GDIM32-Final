@@ -5,15 +5,18 @@
 Put your group Devlog here.
 
 ### Allen Hu
+
+##### Interactable system
 I worked on the Interactable system and the player interaction logic in PlayerController.cs, especially the parts that detect nearby objects, highlight the current target, and let the player interact with E. I also adjusted the on-screen interaction prompt so it is easier to see and hides at the right times, like during dialogue or task selection.
 For the Boss, I organized the flow so the player talks to the Boss first, then gets the task choice panel, and then moves into the next step of the task. I also fixed a repeated dialogue bug by updating DialogueManager.cs, especially in StartDialogue(), DisplayNextLine(), and the frame-based checks that stop the same dialogue from triggering twice.
+##### Task choice and progression system
 Another thing I contributed was the task choice and task progression system. In TaskChoose.cs, I worked on methods like ShowChoicePanel(), SelectTask(), and StartPendingTask() so the player can only choose a task once and the panel behaves correctly. In TaskFlowManager.cs, I set up the state flow for accepting a task, going to drink coffee first, and only then officially starting work. I also kept the top-screen prompt so the player still knows what to do after picking a task.
 Looking back, my proposal was helpful as a starting point, but it was not detailed enough for all the small logic problems that came up during development. Once I started building, I had to figure out a lot more state handling than I expected, especially for how dialogue, input, and UI overlap. My architecture changed a bit too, because I realized it was better to centralize task progression in TaskFlowManager instead of spreading it across multiple scripts.
 
 ### Tiancheng Li
 
 In current stage of game development, Im mainly responsible for the implementatiin of basic game structure and player basic interaction system.
-Game Structure:
+##### Game Structure:
 The game structure at this stage is mainly controlled by three classes:
 DialogueManager class use to controll dialogue flow as a instance
 private Queue<DialogueLine> _lineQueue = new Queue<DialogueLine>(); used to store dialogue information from ScriptableObject Dialogue Data and determine the order in which the dialogue is displayed.
@@ -22,6 +25,7 @@ public event Action<DialogueLine> OnLineStarted;
 public event Action OnDialogueEnded;
 The DisplayNextLine() method is used to update the dialogue when the player clicks(Input.GetKeyDown(KeyCode.E). When a new dialogue begins OnLineStarted?.Invoke(nextLine); instruct the UIManager listener to update its text to the next line. The EndDialogue() method is used to end dialogue state. When dialogue ends OnDialogueEnded?.Invoke(); instruct the UIManager listener to close dialoguePanel.
 
+##### UIManager, Dialogue Manager, TaskChoose
 UIManager class use to controll all UI features as a instance
 UIManager subscribed different event respond differently to different interactions
 DialogueManager.Instance.OnLineStarted += ShowLine;
@@ -31,6 +35,7 @@ TaskChoose.Instance.OnChooseLeft += ShowLeftPanel;
 TaskChoose.Instance.OnChooseRight += ShowRightPanel;
 Different methods are applied based on different events. when OnlineStarted?.Invoke(nextLine) called ShowLine(DialogueLine line) use TMP to Update UI information to current ScriptableObject nextline by nameText.text = line.name; contentText.text = line.content; OnDialogueEnded?.Invoke(); calls HideUI() to hide dialoguePanel, ShowLeftPanel() ShowrightPanel() HideTaskResultPanels();used to display different UIs in different events.
 
+##### AudioManager
 AudioManager class use to controll audio play in different situations in the game as a instance
 public AudioClip clickSound; 
 public AudioClip hoverSound; 
@@ -46,6 +51,7 @@ public void PlayerDrink();
 public void PlayerMove();,etc.
 I only need to use AudioManager.Instance.PlayClick(); in other scripts to play the corresponding sound.
 
+##### interaction system
 I also implement interaction system through 
 In PlayerController class i create Move() to controll players movement InterRange() used to detect interactive items with a layermask of type Interactable within the player's interaction range. 
 In CameraFollow class i use CameraChange() to  synchronize player's transform to camera to achieve first person view, and the camera's view is moved based on mouse movement.
