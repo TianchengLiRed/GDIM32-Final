@@ -17,21 +17,28 @@ public class UIManager: MonoBehaviour
     {
         Instance = this;
     }
-    void Start()
+   IEnumerator Start()
+{
+    dialogPanel.SetActive(false);
+    leftPanel.SetActive(false);
+    rightPanel.SetActive(false);
+    computerPanel.SetActive(false);
+
+    yield return null; // 等一帧，保证所有 Awake 完成
+
+    if (DialogueManager.Instance != null)
     {
-        dialogPanel.SetActive(false);
-        leftPanel.SetActive(false);
-        rightPanel.SetActive(false);
-        computerPanel.SetActive(false);
-        // 订阅事件
-        DialogueManager.Instance.OnLineStarted += ShowLine;//收到通知展示UI
-        DialogueManager.Instance.OnDialogueEnded += HideUI;//收到通知关闭展示
+        DialogueManager.Instance.OnLineStarted += ShowLine;
+        DialogueManager.Instance.OnDialogueEnded += HideUI;
+    }
+
+    if (TaskChoose.Instance != null)
+    {
         TaskChoose.Instance.OnChoicePanelShown += HideTaskResultPanels;
         TaskChoose.Instance.OnChooseLeft += ShowLeftPanel;
         TaskChoose.Instance.OnChooseRight += ShowRightPanel;
-
-
     }
+}
 
     void Update()
     {

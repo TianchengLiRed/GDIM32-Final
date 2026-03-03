@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour
    //对话开始
     public void StartDialogue(DialogueData data, Action onCompleted = null)
     {
+        Debug.Log("Dialogue Started");
         if (data == null) return;
 
         if (IsInDialogue) return;
