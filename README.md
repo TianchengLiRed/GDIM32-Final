@@ -1,11 +1,16 @@
 # GDIM32-Final
 ## Check-In
-### Allen Hu
+
+### Group Devlog
+Put your group Devlog here.
+
+#### Allen Hu
 I worked on the Interactable system and the player interaction logic in PlayerController.cs, especially the parts that detect nearby objects, highlight the current target, and let the player interact with E. I also adjusted the on-screen interaction prompt so it is easier to see and hides at the right times, like during dialogue or task selection.
 For the Boss, I organized the flow so the player talks to the Boss first, then gets the task choice panel, and then moves into the next step of the task. I also fixed a repeated dialogue bug by updating DialogueManager.cs, especially in StartDialogue(), DisplayNextLine(), and the frame-based checks that stop the same dialogue from triggering twice.
 Another thing I contributed was the task choice and task progression system. In TaskChoose.cs, I worked on methods like ShowChoicePanel(), SelectTask(), and StartPendingTask() so the player can only choose a task once and the panel behaves correctly. In TaskFlowManager.cs, I set up the state flow for accepting a task, going to drink coffee first, and only then officially starting work. I also kept the top-screen prompt so the player still knows what to do after picking a task.
 Looking back, my proposal was helpful as a starting point, but it was not detailed enough for all the small logic problems that came up during development. Once I started building, I had to figure out a lot more state handling than I expected, especially for how dialogue, input, and UI overlap. My architecture changed a bit too, because I realized it was better to centralize task progression in TaskFlowManager instead of spreading it across multiple scripts.
-### Tiancheng Li
+
+#### Tiancheng Li
 
 In current stage of game development, Im mainly responsible for the implementatiin of basic game structure and player basic interaction system.
 Game Structure:
