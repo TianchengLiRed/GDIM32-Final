@@ -6110,8 +6110,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 370, y: 147}
+  m_SizeDelta: {x: -727.3956, y: -279.4123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &381541967
 MonoBehaviour:
@@ -6126,7 +6126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7111,8 +7111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 159.64001, y: -188.96832}
-  m_SizeDelta: {x: 160, y: 47.4371}
+  m_AnchoredPosition: {x: 154, y: -85}
+  m_SizeDelta: {x: 82.8986, y: 23.8626}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &448686165
 MonoBehaviour:
@@ -9897,8 +9897,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -174.64001, y: -188.96832}
-  m_SizeDelta: {x: 160, y: 47.4371}
+  m_AnchoredPosition: {x: -153, y: -85}
+  m_SizeDelta: {x: 82.8986, y: 23.8626}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &621694975
 MonoBehaviour:
@@ -14601,7 +14601,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b17cf9b02e0a44ab0a580415cd4e652c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -20753,8 +20753,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 159.64, y: 0}
-  m_SizeDelta: {x: 264.7212, y: 262.9111}
+  m_AnchoredPosition: {x: 154, y: 10.058}
+  m_SizeDelta: {x: 137.1563, y: 132.2541}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1301654889
 MonoBehaviour:
@@ -23402,8 +23402,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -174.64, y: 9}
-  m_SizeDelta: {x: 264.7212, y: 262.9111}
+  m_AnchoredPosition: {x: -151, y: 10.058}
+  m_SizeDelta: {x: 137.1563, y: 132.2541}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1463577706
 MonoBehaviour:
@@ -28086,8 +28086,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 46, y: -8}
-  m_SizeDelta: {x: -744.3804, y: -241.5285}
+  m_AnchoredPosition: {x: 0, y: 11.84}
+  m_SizeDelta: {x: -326.19, y: -241.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1803707477
 MonoBehaviour:
@@ -32069,8 +32069,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 370, y: 147}
+  m_SizeDelta: {x: -727.3956, y: -279.4123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2003927175
 MonoBehaviour:
@@ -32085,7 +32085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
