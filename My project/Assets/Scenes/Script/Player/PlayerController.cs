@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private enum PlayerState{
+
+    Idle,
+    Walking,    // 行走
+    Interacting, // 交互
+    Jumping //跳跃
+
+   }
+   private PlayerState currentState = PlayerState.Idle;
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
 
@@ -14,7 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask interactLayer;
     [SerializeField] private float detectRange = 3f;//检测范围
     private Interactable currentInteractable;
-
+/*
     [Header("GUI Prompt")]
     [SerializeField] private Vector2 guiPromptSize = new Vector2(380f, 78f);
     [SerializeField] private Vector2 guiPromptOffset = new Vector2(0f, -80f);
@@ -26,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Color guiPromptBorderColor = new Color(1f, 0.9f, 0.2f, 0.95f);
     [SerializeField] private float guiPromptPulseSpeed = 3f;
     [SerializeField] private float guiPromptPulseStrength = 0.25f;
+*/
 
     private Rigidbody rb;
     private Animator animator;
@@ -46,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        UpdateState();//状态机器
         ReadInput();
         CheckGround();
         UpdateAnimator();
@@ -63,9 +74,33 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
     }
+    private void UpdateState()
+{
+    if (currentInteractable != null && Input.GetKey(KeyCode.E))//如果监测到交互物体
+    {
+        currentState = PlayerState.Interacting;//切换状态
+        return;
+    }
+       if (!IsGrounded)//如果监测跳跃
+    {
+        currentState = PlayerState.Jumping;//切换跳跃状态
+        return;
+    }
+
+    if (moveInput.magnitude > 0f)//如果监测走路
+    {
+        currentState =PlayerState.Walking;//切换走路状态
+    }
+
+
+}
 
     private void ReadInput()
     {
+           if (currentState == PlayerState.Interacting){
+
+            return;
+        } // 交互中不能跳
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput = Vector2.ClampMagnitude(moveInput, 1f);
@@ -78,6 +113,10 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
+        if (currentState == PlayerState.Interacting){
+
+            return;
+        } // 交互中不能跳
         float speed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
 
         Vector3 move = transform.forward * moveInput.y + transform.right * moveInput.x;
@@ -93,6 +132,7 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
+        if (currentState == PlayerState.Interacting) return; // 交互中不能跳
         if (jumpQueued && IsGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -122,7 +162,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsGrounded", IsGrounded);
     }
 
-   private void InterRange()
+   void InterRange()
     {
         Interactable nextInteractable = null;
         float closestSqr = float.MaxValue;
@@ -159,6 +199,11 @@ public class PlayerController : MonoBehaviour
 
     private void TryInteractCurrent()
     {
+        if (currentInteractable == null) return;
+
+        // 设置状态为交互
+        currentState = PlayerState.Interacting;
+
         // 对话进行中时，E 键用于推进对话，不触发场景交互
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsInDialogue)
         {
@@ -178,8 +223,20 @@ public class PlayerController : MonoBehaviour
         {
             AudioManager.Instance.PlayClick();
         }
-    }
 
+    // 交互完成后，再切回 Idle 或其他状态
+    StartCoroutine(EndInteraction(3));
+}
+
+private IEnumerator EndInteraction(float duration)
+{
+    yield return new WaitForSeconds(duration);
+    currentState = PlayerState.Idle;
+}
+
+
+
+/*
     private void OnGUI()
     {
         if (currentInteractable == null) return;
@@ -266,5 +323,5 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectRange);
     }
-
+*/
 }
