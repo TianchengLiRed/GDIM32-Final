@@ -14,8 +14,11 @@ public class Interactable : MonoBehaviour
     [SerializeField] private int ringSegments = 48;
 
     [Header("GUI Prompt")]
-    [SerializeField] private string promptText = "按 E 交互";
+    [SerializeField] private string promptText = "Press E";
     [SerializeField] private Vector3 promptOffset = new Vector3(0f, 2f, 0f);
+
+    [Header("Guide Marker")]
+    [SerializeField] private Vector3 guideOffset = new Vector3(0f, 2.6f, 0f);
 
     private Renderer[] _renderers;
     private LineRenderer _highlightRing;
@@ -33,11 +36,21 @@ public class Interactable : MonoBehaviour
     }
     public virtual void OnInteract()
     {
+        NotifyTaskObjectiveInteracted();
         Debug.Log($"[交互成功] 你点击了物品: {gameObject.name}");
     }
 
     public string PromptText => promptText;
     public Vector3 PromptWorldPosition => transform.position + promptOffset;
+    public Vector3 GuideWorldPosition => transform.position + guideOffset;
+
+    protected void NotifyTaskObjectiveInteracted()
+    {
+        if (TaskFlowManager.HasInstance)
+        {
+            TaskFlowManager.Instance.NotifyInteracted(this);
+        }
+    }
 
     private void CacheRenderers()
     {
@@ -79,7 +92,12 @@ public class Interactable : MonoBehaviour
 
         if (!hasBounds) return;
 
-        float radius = Mathf.Max(bounds.extents.x, bounds.extents.z) + ringPadding;
+        Vector3 lossyScale = transform.lossyScale;
+        float scaleX = Mathf.Approximately(lossyScale.x, 0f) ? 1f : lossyScale.x;
+        float scaleZ = Mathf.Approximately(lossyScale.z, 0f) ? 1f : lossyScale.z;
+        float maxHorizontalScale = Mathf.Max(Mathf.Abs(scaleX), Mathf.Abs(scaleZ));
+
+        float radius = Mathf.Max(bounds.extents.x / Mathf.Abs(scaleX), bounds.extents.z / Mathf.Abs(scaleZ)) + ringPadding;
         Vector3 worldCenter = new Vector3(bounds.center.x, bounds.min.y + ringYOffset, bounds.center.z);
         Vector3 localCenter = transform.InverseTransformPoint(worldCenter);
 
@@ -91,7 +109,7 @@ public class Interactable : MonoBehaviour
         _highlightRing.loop = true;
         _highlightRing.useWorldSpace = false;
         _highlightRing.positionCount = Mathf.Max(16, ringSegments);
-        _highlightRing.widthMultiplier = ringWidth;
+        _highlightRing.widthMultiplier = ringWidth / maxHorizontalScale;
         _highlightRing.numCornerVertices = 8;
         _highlightRing.numCapVertices = 8;
         _highlightRing.shadowCastingMode = ShadowCastingMode.Off;
