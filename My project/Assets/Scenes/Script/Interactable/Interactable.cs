@@ -14,7 +14,7 @@ public class Interactable : MonoBehaviour
     [SerializeField] private int ringSegments = 48;
 
     [Header("GUI Prompt")]
-    [SerializeField] private string promptText = "按 E 交互";
+    [SerializeField] private string promptText = "Press E";
     [SerializeField] private Vector3 promptOffset = new Vector3(0f, 2f, 0f);
 
     private Renderer[] _renderers;
