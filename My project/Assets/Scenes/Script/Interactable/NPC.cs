@@ -8,6 +8,8 @@ public class NPC : LookAtPlayerInteractable
 
     public override void OnInteract()
     {
+        NotifyTaskObjectiveInteracted();
+
         if (myDialogue != null)
         {
             Animator.SetBool("Istalking", true);
