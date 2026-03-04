@@ -2089,6 +2089,7 @@ MonoBehaviour:
   ringSegments: 48
   promptText: Press E
   promptOffset: {x: 0, y: 2, z: 0}
+  guideOffset: {x: 0, y: 2.6, z: 0}
   noteContent: 111
 --- !u!1001 &68975472
 PrefabInstance:
@@ -3748,6 +3749,7 @@ MonoBehaviour:
   ringSegments: 48
   promptText: Press E
   promptOffset: {x: 0, y: 2, z: 0}
+  guideOffset: {x: 0, y: 2.6, z: 0}
   player: {fileID: 653885686}
   rotationSpeed: 5
   myDialogue: {fileID: 11400000, guid: 643405005188c4145a83b4720cd11f30, type: 2}
@@ -11848,82 +11850,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   detectRange: 1.5
-  guiPromptSize: {x: 180, y: 36}
-  guiPromptOffset: {x: 0, y: -80}
-  guiPromptStyle:
-    m_Name: 
-    m_Normal:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Hover:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Active:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Focused:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnNormal:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnHover:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnActive:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnFocused:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Margin:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Padding:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Overflow:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 0
-    m_FontStyle: 0
-    m_Alignment: 0
-    m_WordWrap: 0
-    m_RichText: 1
-    m_TextClipping: 0
-    m_ImagePosition: 0
-    m_ContentOffset: {x: 0, y: 0}
-    m_FixedWidth: 0
-    m_FixedHeight: 0
-    m_StretchWidth: 1
-    m_StretchHeight: 0
-  guiPromptFontSize: 28
-  guiPromptTextColor: {r: 1, g: 0.95, b: 0.2, a: 1}
-  guiPromptOutlineColor: {r: 0, g: 0, b: 0, a: 1}
-  guiPromptBgColor: {r: 0, g: 0, b: 0, a: 0.7}
-  guiPromptBorderColor: {r: 1, g: 0.9, b: 0.2, a: 0.95}
-  guiPromptPulseSpeed: 3
-  guiPromptPulseStrength: 0.25
 --- !u!4 &653885686
 Transform:
   m_ObjectHideFlags: 0
@@ -19629,6 +19555,7 @@ MonoBehaviour:
   ringSegments: 20
   promptText: Press E
   promptOffset: {x: 0, y: 2, z: 0}
+  guideOffset: {x: 0, y: 2.6, z: 0}
 --- !u!65 &1131105064
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21831,6 +21758,7 @@ MonoBehaviour:
   ringSegments: 48
   promptText: Press E
   promptOffset: {x: 0, y: 2, z: 0}
+  guideOffset: {x: 0, y: 2.6, z: 0}
   player: {fileID: 653885686}
   rotationSpeed: 5
   myDialogue: {fileID: 11400000, guid: d77bc77b06ce3451b9406e84856df946, type: 2}
@@ -23045,6 +22973,7 @@ MonoBehaviour:
   ringSegments: 48
   promptText: Press E
   promptOffset: {x: 0, y: 2, z: 0}
+  guideOffset: {x: 0, y: 2.6, z: 0}
 --- !u!4 &1313785247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3042016231070954709, guid: a55c555f579cc3647bf8aaf8116217a9, type: 3}
