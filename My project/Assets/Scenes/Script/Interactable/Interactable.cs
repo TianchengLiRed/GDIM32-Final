@@ -40,9 +40,9 @@ public class Interactable : MonoBehaviour
         Debug.Log($"[交互成功] 你点击了物品: {gameObject.name}");
     }
 
-    public string PromptText => promptText;
-    public Vector3 PromptWorldPosition => transform.position + promptOffset;
-    public Vector3 GuideWorldPosition => transform.position + guideOffset;
+    public virtual string PromptText => promptText;
+    public virtual Vector3 PromptWorldPosition => transform.position + promptOffset;
+    public virtual Vector3 GuideWorldPosition => transform.position + guideOffset;
 
     protected void NotifyTaskObjectiveInteracted()
     {
