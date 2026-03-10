@@ -20189,6 +20189,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3042016231070954709, guid: a55c555f579cc3647bf8aaf8116217a9, type: 3}
   m_PrefabInstance: {fileID: 600120845}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1171645606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7610345134387402476, guid: 95d7dcfcb3189ab4c86b35b6c76dd40e, type: 3}
+  m_PrefabInstance: {fileID: 1479102789}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1173750895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25941,13 +25946,88 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7610345134387402476, guid: 95d7dcfcb3189ab4c86b35b6c76dd40e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1479102792}
+    - targetCorrespondingSourceObject: {fileID: 7610345134387402476, guid: 95d7dcfcb3189ab4c86b35b6c76dd40e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1479102791}
   m_SourcePrefab: {fileID: 100100000, guid: 95d7dcfcb3189ab4c86b35b6c76dd40e, type: 3}
 --- !u!4 &1479102790 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7610345134387402479, guid: 95d7dcfcb3189ab4c86b35b6c76dd40e, type: 3}
   m_PrefabInstance: {fileID: 1479102789}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1479102791
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171645606}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1479102792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171645606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2ad151834fe4fc7bc4831e8ffe147b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeChildRenderers: 1
+  ringColor: {r: 1, g: 0.9, b: 0.2, a: 1}
+  ringWidth: 0.08
+  ringPadding: 0.2
+  ringYOffset: 0.12
+  ringSegments: 48
+  promptText: Press E
+  promptOffset: {x: 0, y: 2, z: 0}
+  guideOffset: {x: 0, y: 2.6, z: 0}
+  autoStartOnPlay: 0
+  autoStartOnTaskChoice: 1
+  startOnLeftChoice: 1
+  startOnRightChoice: 1
+  requiredAnsweredCalls: 1
+  firstCallDelay: 3
+  callIntervalRange: {x: 8, y: 16}
+  ringDuration: 6
+  idlePrompt: Phone is idle
+  ringingPrompt: Press E to answer
+  guidePrompt: Phone is ringing! Go answer it
+  guideWhileRinging: 1
+  ringSource: {fileID: 0}
+  ringClip: {fileID: 0}
+  ringVolume: 1
+  onCallStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCallMissed:
+    m_PersistentCalls:
+      m_Calls: []
+  onCallAnswered:
+    m_PersistentCalls:
+      m_Calls: []
+  onTaskCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1482492031
 PrefabInstance:
   m_ObjectHideFlags: 0

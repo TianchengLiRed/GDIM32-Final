@@ -168,7 +168,13 @@ public class PlayerController : MonoBehaviour
         float closestSqr = float.MaxValue;
         HashSet<Interactable> candidates = new HashSet<Interactable>();
         // 扫描玩家周围 detectRange 距离内的所有碰撞体
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectRange, interactLayer);
+        int layerMask = interactLayer.value == 0 ? Physics.AllLayers : interactLayer.value;
+        Collider[] hits = Physics.OverlapSphere(
+            transform.position,
+            detectRange,
+            layerMask,
+            QueryTriggerInteraction.Collide
+        );
         foreach (var hit in hits)
         {
             //如果是interactable
@@ -181,7 +187,12 @@ public class PlayerController : MonoBehaviour
 
         foreach (var interactable in candidates)
         {
-            float sqrDist = (interactable.transform.position - transform.position).sqrMagnitude;
+            Collider interactableCollider = interactable.GetComponent<Collider>();
+            Vector3 targetPos = interactableCollider != null
+                ? interactableCollider.ClosestPoint(transform.position)
+                : interactable.transform.position;
+
+            float sqrDist = (targetPos - transform.position).sqrMagnitude;
             if (sqrDist < closestSqr)
             {
                 closestSqr = sqrDist;
