@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class UIManager: MonoBehaviour
 {
     public static UIManager Instance;
+<<<<<<< ours
+<<<<<<< ours
     [Header("DialogueRelated")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI _nameText;
@@ -25,6 +27,20 @@ public class UIManager: MonoBehaviour
     [SerializeField] private GameObject leftPanel;
     [SerializeField] private GameObject rightPanel;
 
+=======
+=======
+>>>>>>> theirs
+    
+    [SerializeField] private GameObject dialogPanel;
+    [SerializeField] private GameObject computerPanel;
+    [SerializeField] private GameObject leftPanel;
+    [SerializeField] private GameObject rightPanel;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI contentText;
+<<<<<<< ours
+>>>>>>> theirs
+=======
+>>>>>>> theirs
 
     void Awake()
     {
@@ -188,7 +204,11 @@ public class UIManager: MonoBehaviour
     {
          computerPanel.SetActive(false);
          Cursor.lockState = CursorLockMode.None;
+<<<<<<< ours
          Cursor.visible = false;
+=======
+    Cursor.visible = false;
+>>>>>>> theirs
 
     }
 }
