@@ -8,7 +8,7 @@ public class NPC : LookAtPlayerInteractable
 
     public override void OnInteract()
     {
-        NotifyTaskObjectiveInteracted();
+        base.OnInteract();
 
         if (myDialogue != null)
         {

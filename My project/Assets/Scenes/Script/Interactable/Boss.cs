@@ -8,7 +8,7 @@ public class Boss : LookAtPlayerInteractable
     [SerializeField] private Animator Animator;
     public override void OnInteract()
     {
-        NotifyTaskObjectiveInteracted();
+        base.OnInteract();
         Animator.SetBool("Istalking", true);
         if (TaskChoose.Instance != null && TaskChoose.Instance.IsChoicePanelOpen)
         {

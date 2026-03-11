@@ -1,107 +1,146 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager: MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-<<<<<<< ours
-<<<<<<< ours
+
     [Header("DialogueRelated")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private Image _portraitImage;
-
     [SerializeField] private List<TextMeshProUGUI> _branchTexts;
     [SerializeField] private List<Button> _branchButtons;
+
     [Header("TypeText")]
     [SerializeField] private TextMeshProUGUI _contentText;
     [SerializeField] private float typeSpeed = 0.03f;
 
+    [Header("Task Panels")]
+    [SerializeField] private GameObject computerPanel;
+    [SerializeField] private GameObject leftPanel;
+    [SerializeField] private GameObject rightPanel;
+
+    [Header("Checklist")]
+    [SerializeField] private ChecklistBinding[] leftChecklist;
+    [SerializeField] private ChecklistBinding[] rightChecklist;
+
     private Coroutine typingCoroutine;
+    private readonly HashSet<Interactable> completedInteractables = new HashSet<Interactable>();
+    private readonly Dictionary<TextMeshProUGUI, string> baseChecklistText = new Dictionary<TextMeshProUGUI, string>();
+    private ChecklistBinding[] activeChecklist;
 
+    [Serializable]
+    private class ChecklistBinding
+    {
+        public Interactable target;
+        public TextMeshProUGUI text;
+        public string pendingPrefix = "[ ] ";
+        public string donePrefix = "[x] ";
+    }
 
-    [SerializeField] private GameObject computerPanel;
-    [SerializeField] private GameObject leftPanel;
-    [SerializeField] private GameObject rightPanel;
-
-=======
-=======
->>>>>>> theirs
-    
-    [SerializeField] private GameObject dialogPanel;
-    [SerializeField] private GameObject computerPanel;
-    [SerializeField] private GameObject leftPanel;
-    [SerializeField] private GameObject rightPanel;
-    [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI contentText;
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-
-    void Awake()
+    private void Awake()
     {
         Instance = this;
     }
-   IEnumerator Start()
-{
-    dialoguePanel.SetActive(false);
-    for(int i =0; i < _branchButtons.Count; i++)
+
+    private IEnumerator Start()
     {
-        _branchButtons[i].gameObject.SetActive(false);
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+        if (leftPanel != null) leftPanel.SetActive(false);
+        if (rightPanel != null) rightPanel.SetActive(false);
+        if (computerPanel != null) computerPanel.SetActive(false);
+
+        if (_branchButtons != null)
+        {
+            for (int i = 0; i < _branchButtons.Count; i++)
+            {
+                if (_branchButtons[i] != null)
+                {
+                    _branchButtons[i].gameObject.SetActive(false);
+                }
+            }
+        }
+
+        yield return null;
+
+        if (DialogueManager.Instance != null)
+        {
+            DialogueManager.Instance.OnLineStarted += ShowLine;
+            DialogueManager.Instance.OnDialogueEnded += HideUI;
+            DialogueManager.Instance.OnDialogueReplied += ShowChoice;
+        }
+
+        if (TaskChoose.Instance != null)
+        {
+            TaskChoose.Instance.OnChoicePanelShown += HideTaskResultPanels;
+            TaskChoose.Instance.OnChooseLeft += ShowLeftPanel;
+            TaskChoose.Instance.OnChooseRight += ShowRightPanel;
+        }
+
+        Interactable.OnInteracted += HandleInteractableCompleted;
+        CacheChecklistBaseTexts(leftChecklist);
+        CacheChecklistBaseTexts(rightChecklist);
+        ResetChecklistVisuals(leftChecklist);
+        ResetChecklistVisuals(rightChecklist);
     }
-    leftPanel.SetActive(false);
-    rightPanel.SetActive(false);
-    computerPanel.SetActive(false);
 
-    yield return null; // 等一帧，保证所有 Awake 完成
-
-    if (DialogueManager.Instance != null)
-    {
-        DialogueManager.Instance.OnLineStarted += ShowLine;
-        DialogueManager.Instance.OnDialogueEnded += HideUI;
-        DialogueManager.Instance.OnDialogueReplied += ShowChoice;
-    }
-
-    if (TaskChoose.Instance != null)
-    {
-        TaskChoose.Instance.OnChoicePanelShown += HideTaskResultPanels;
-        TaskChoose.Instance.OnChooseLeft += ShowLeftPanel;
-        TaskChoose.Instance.OnChooseRight += ShowRightPanel;
-    }
-}
-
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E)
             && DialogueManager.Instance != null
             && DialogueManager.Instance.CanAdvanceDialogue)
         {
             OnClickNext();
-
         }
-        
     }
 
-    private void ShowLine(DialogueLine line)//展示对应line的文字和name
+    private void OnDestroy()
     {
-        dialoguePanel.SetActive(true);
-        _nameText.text = line.speakerName;
-        ShowText(line.content); // 这里之后可以加打字机效果
-        _portraitImage.sprite = line.portrait;
-
-        for(int i = 0; i < _branchButtons.Count; i++)
+        if (DialogueManager.Instance != null)
         {
-            _branchButtons[i].gameObject.SetActive(false);   
+            DialogueManager.Instance.OnLineStarted -= ShowLine;
+            DialogueManager.Instance.OnDialogueEnded -= HideUI;
+            DialogueManager.Instance.OnDialogueReplied -= ShowChoice;
+        }
+
+        if (TaskChoose.Instance != null)
+        {
+            TaskChoose.Instance.OnChoicePanelShown -= HideTaskResultPanels;
+            TaskChoose.Instance.OnChooseLeft -= ShowLeftPanel;
+            TaskChoose.Instance.OnChooseRight -= ShowRightPanel;
+        }
+
+        Interactable.OnInteracted -= HandleInteractableCompleted;
+    }
+
+    private void ShowLine(DialogueLine line)
+    {
+        if (line == null) return;
+
+        if (dialoguePanel != null) dialoguePanel.SetActive(true);
+        if (_nameText != null) _nameText.text = line.speakerName;
+        if (_portraitImage != null) _portraitImage.sprite = line.portrait;
+
+        ShowText(line.content);
+
+        if (_branchButtons == null) return;
+        for (int i = 0; i < _branchButtons.Count; i++)
+        {
+            if (_branchButtons[i] != null)
+            {
+                _branchButtons[i].gameObject.SetActive(false);
+            }
         }
     }
 
     public void ShowText(string content)
     {
-        if(typingCoroutine != null)
+        if (typingCoroutine != null)
         {
             StopCoroutine(typingCoroutine);
         }
@@ -111,8 +150,16 @@ public class UIManager: MonoBehaviour
 
     private IEnumerator TypeText(string content)
     {
-        _contentText.text = "";
-          foreach (char c in content)
+        if (_contentText == null) yield break;
+
+        _contentText.text = string.Empty;
+        if (string.IsNullOrEmpty(content))
+        {
+            typingCoroutine = null;
+            yield break;
+        }
+
+        foreach (char c in content)
         {
             _contentText.text += c;
             yield return new WaitForSeconds(typeSpeed);
@@ -121,46 +168,69 @@ public class UIManager: MonoBehaviour
         typingCoroutine = null;
     }
 
-    private void ShowChoice(DialogueLine line){
-        for(int i = 0; i < _branchButtons.Count; i++)
-        {
-            if(line.replyOptions != null && i < line.replyOptions.Count)
-            {
-                _branchButtons[i].gameObject.SetActive(true);
-                _branchTexts[i].text = line.replyOptions[i];
+    private void ShowChoice(DialogueLine line)
+    {
+        if (_branchButtons == null || _branchTexts == null || line == null) return;
 
-                int index = i;
-                _branchButtons[i].onClick.RemoveAllListeners();
-                _branchButtons[i].onClick.AddListener(()=>{
+        for (int i = 0; i < _branchButtons.Count; i++)
+        {
+            if (_branchButtons[i] == null) continue;
+
+            bool hasOption = line.replyOptions != null && i < line.replyOptions.Count;
+            _branchButtons[i].gameObject.SetActive(hasOption);
+
+            if (!hasOption) continue;
+
+            if (i < _branchTexts.Count && _branchTexts[i] != null)
+            {
+                _branchTexts[i].text = line.replyOptions[i];
+            }
+
+            int index = i;
+            _branchButtons[i].onClick.RemoveAllListeners();
+            _branchButtons[i].onClick.AddListener(() =>
+            {
+                if (DialogueManager.Instance != null)
+                {
                     DialogueManager.Instance.SelectReply(index);
-                });
+                }
+            });
+        }
+    }
+
+    private void HideUI()
+    {
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+
+        if (_branchButtons == null) return;
+        for (int i = 0; i < _branchButtons.Count; i++)
+        {
+            if (_branchButtons[i] != null)
+            {
+                _branchButtons[i].gameObject.SetActive(false);
             }
         }
     }
 
-    private void HideUI() 
-    {
-        dialoguePanel.SetActive(false);
-
-        for (int i = 0; i < _branchButtons.Count; i++)
-        {
-            _branchButtons[i].gameObject.SetActive(false);
-        }
-    }
-
-    // 玩家点击对话框推进下一句
     public void OnClickNext()
     {
+        if (DialogueManager.Instance == null) return;
+
         if (DialogueManager.Instance.IsWaitingLoopChoice)
         {
             DialogueManager.Instance.DisplayNextLine();
-         return;
-       }
+            return;
+        }
 
-        for (int i = 0; i < _branchButtons.Count; i++)
+        if (_branchButtons != null)
         {
-            if (_branchButtons[i].gameObject.activeSelf)
-               return;
+            for (int i = 0; i < _branchButtons.Count; i++)
+            {
+                if (_branchButtons[i] != null && _branchButtons[i].gameObject.activeSelf)
+                {
+                    return;
+                }
+            }
         }
 
         DialogueManager.Instance.DisplayNextLine();
@@ -169,46 +239,118 @@ public class UIManager: MonoBehaviour
     private void ShowLeftPanel()
     {
         HideTaskResultPanels();
-        leftPanel.SetActive(true);
+        BeginChecklist(leftChecklist);
+        if (leftPanel != null) leftPanel.SetActive(true);
     }
 
     private void ShowRightPanel()
     {
         HideTaskResultPanels();
-        rightPanel.SetActive(true);
+        BeginChecklist(rightChecklist);
+        if (rightPanel != null) rightPanel.SetActive(true);
     }
 
     private void HideTaskResultPanels()
     {
-        leftPanel.SetActive(false);
-        rightPanel.SetActive(false);
+        if (leftPanel != null) leftPanel.SetActive(false);
+        if (rightPanel != null) rightPanel.SetActive(false);
     }
 
     public void OpenComputerPanel()
     {
-        computerPanel.SetActive(true);
-         Cursor.lockState = CursorLockMode.None;
-    Cursor.visible = true;
+        if (computerPanel != null) computerPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void Email()
     {
-
     }
 
     public void Form()
     {
-
     }
+
     public void Close()
     {
-         computerPanel.SetActive(false);
-         Cursor.lockState = CursorLockMode.None;
-<<<<<<< ours
-         Cursor.visible = false;
-=======
-    Cursor.visible = false;
->>>>>>> theirs
+        if (computerPanel != null) computerPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
+    }
 
+    private void BeginChecklist(ChecklistBinding[] checklist)
+    {
+        completedInteractables.Clear();
+        activeChecklist = checklist;
+        RefreshChecklist(checklist);
+    }
+
+    private void HandleInteractableCompleted(Interactable interactable)
+    {
+        if (interactable == null || activeChecklist == null || activeChecklist.Length == 0) return;
+
+        for (int i = 0; i < activeChecklist.Length; i++)
+        {
+            if (activeChecklist[i] != null && activeChecklist[i].target == interactable)
+            {
+                completedInteractables.Add(interactable);
+                RefreshChecklist(activeChecklist);
+                return;
+            }
+        }
+    }
+
+    private void CacheChecklistBaseTexts(ChecklistBinding[] checklist)
+    {
+        if (checklist == null) return;
+
+        for (int i = 0; i < checklist.Length; i++)
+        {
+            ChecklistBinding binding = checklist[i];
+            if (binding == null || binding.text == null) continue;
+            if (baseChecklistText.ContainsKey(binding.text)) continue;
+            baseChecklistText[binding.text] = binding.text.text;
+        }
+    }
+
+    private void ResetChecklistVisuals(ChecklistBinding[] checklist)
+    {
+        if (checklist == null) return;
+
+        for (int i = 0; i < checklist.Length; i++)
+        {
+            ChecklistBinding binding = checklist[i];
+            if (binding == null || binding.text == null) continue;
+
+            string baseText = GetBaseText(binding.text);
+            binding.text.text = $"{binding.pendingPrefix}{baseText}";
+        }
+    }
+
+    private void RefreshChecklist(ChecklistBinding[] checklist)
+    {
+        if (checklist == null) return;
+
+        for (int i = 0; i < checklist.Length; i++)
+        {
+            ChecklistBinding binding = checklist[i];
+            if (binding == null || binding.text == null) continue;
+
+            string baseText = GetBaseText(binding.text);
+            bool isDone = binding.target != null && completedInteractables.Contains(binding.target);
+            binding.text.text = isDone
+                ? $"{binding.donePrefix}<s>{baseText}</s>"
+                : $"{binding.pendingPrefix}{baseText}";
+        }
+    }
+
+    private string GetBaseText(TextMeshProUGUI textComp)
+    {
+        if (textComp == null) return string.Empty;
+        if (baseChecklistText.TryGetValue(textComp, out string value)) return value;
+
+        value = textComp.text;
+        baseChecklistText[textComp] = value;
+        return value;
     }
 }

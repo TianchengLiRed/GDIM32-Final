@@ -123,7 +123,7 @@ public class PhoneInteractable : Interactable
             return;
         }
 
-        NotifyTaskObjectiveInteracted();
+        base.OnInteract();
         answeredCount++;
         onCallAnswered?.Invoke();
         StopRinging();

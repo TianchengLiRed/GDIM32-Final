@@ -10,7 +10,7 @@ public class Coffee : Interactable
     {
         if (hasDrankCoffee) return;
 
-        NotifyTaskObjectiveInteracted();
+        base.OnInteract();
         hasDrankCoffee = true;
         TimerManager.Instance.StartTimer(30);
         AudioManager.Instance.PlayerDrink();

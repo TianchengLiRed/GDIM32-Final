@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class Interactable : MonoBehaviour
 {
+    public static event Action<Interactable> OnInteracted;
+
     [Header("Highlight Ring")]
     [SerializeField] private bool includeChildRenderers = true;
     [SerializeField] private Color ringColor = new Color(1f, 0.9f, 0.2f, 1f);
@@ -37,6 +40,7 @@ public class Interactable : MonoBehaviour
     public virtual void OnInteract()
     {
         NotifyTaskObjectiveInteracted();
+        OnInteracted?.Invoke(this);
         Debug.Log($"[交互成功] 你点击了物品: {gameObject.name}");
     }
 
