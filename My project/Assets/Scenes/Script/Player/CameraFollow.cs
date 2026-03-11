@@ -9,7 +9,7 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private float maxSensitivity = 400f;
     [SerializeField] private float sensitivity = 180f;
     [SerializeField] private float lookSmoothTime = 0.03f;
-    [SerializeField] private bool lockCursor = true;
+    //[SerializeField] private bool lockCursor = true;
     public Transform player;
     private float xRotation = 0f;
     private Vector2 currentLookDelta;
@@ -19,11 +19,11 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         sensitivity = Mathf.Clamp(sensitivity, minSensitivity, maxSensitivity);
-        if (lockCursor)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+        //if (lockCursor)
+        //{
+          //  Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
+        //}
     }
 
     // Update is called once per frame

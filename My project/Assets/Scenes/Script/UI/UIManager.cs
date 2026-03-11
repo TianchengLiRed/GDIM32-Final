@@ -2,16 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 public class UIManager: MonoBehaviour
 {
     public static UIManager Instance;
-    
-    [SerializeField] private GameObject dialogPanel;
+    [Header("DialogueRelated")]
+    [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private Image _portraitImage;
+
+    [SerializeField] private List<TextMeshProUGUI> _branchTexts;
+    [SerializeField] private List<Button> _branchButtons;
+    [Header("TypeText")]
+    [SerializeField] private TextMeshProUGUI _contentText;
+    [SerializeField] private float typeSpeed = 0.03f;
+
+    private Coroutine typingCoroutine;
+
+
     [SerializeField] private GameObject computerPanel;
     [SerializeField] private GameObject leftPanel;
     [SerializeField] private GameObject rightPanel;
-    [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI contentText;
+
 
     void Awake()
     {
@@ -19,7 +32,11 @@ public class UIManager: MonoBehaviour
     }
    IEnumerator Start()
 {
-    dialogPanel.SetActive(false);
+    dialoguePanel.SetActive(false);
+    for(int i =0; i < _branchButtons.Count; i++)
+    {
+        _branchButtons[i].gameObject.SetActive(false);
+    }
     leftPanel.SetActive(false);
     rightPanel.SetActive(false);
     computerPanel.SetActive(false);
@@ -30,6 +47,7 @@ public class UIManager: MonoBehaviour
     {
         DialogueManager.Instance.OnLineStarted += ShowLine;
         DialogueManager.Instance.OnDialogueEnded += HideUI;
+        DialogueManager.Instance.OnDialogueReplied += ShowChoice;
     }
 
     if (TaskChoose.Instance != null)
@@ -54,16 +72,81 @@ public class UIManager: MonoBehaviour
 
     private void ShowLine(DialogueLine line)//展示对应line的文字和name
     {
-        dialogPanel.SetActive(true);
-        nameText.text = line.name;
-        contentText.text = line.content; // 这里之后可以加打字机效果
+        dialoguePanel.SetActive(true);
+        _nameText.text = line.speakerName;
+        ShowText(line.content); // 这里之后可以加打字机效果
+        _portraitImage.sprite = line.portrait;
+
+        for(int i = 0; i < _branchButtons.Count; i++)
+        {
+            _branchButtons[i].gameObject.SetActive(false);   
+        }
     }
 
-    private void HideUI() => dialogPanel.SetActive(false);
+    public void ShowText(string content)
+    {
+        if(typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+
+        typingCoroutine = StartCoroutine(TypeText(content));
+    }
+
+    private IEnumerator TypeText(string content)
+    {
+        _contentText.text = "";
+          foreach (char c in content)
+        {
+            _contentText.text += c;
+            yield return new WaitForSeconds(typeSpeed);
+        }
+
+        typingCoroutine = null;
+    }
+
+    private void ShowChoice(DialogueLine line){
+        for(int i = 0; i < _branchButtons.Count; i++)
+        {
+            if(line.replyOptions != null && i < line.replyOptions.Count)
+            {
+                _branchButtons[i].gameObject.SetActive(true);
+                _branchTexts[i].text = line.replyOptions[i];
+
+                int index = i;
+                _branchButtons[i].onClick.RemoveAllListeners();
+                _branchButtons[i].onClick.AddListener(()=>{
+                    DialogueManager.Instance.SelectReply(index);
+                });
+            }
+        }
+    }
+
+    private void HideUI() 
+    {
+        dialoguePanel.SetActive(false);
+
+        for (int i = 0; i < _branchButtons.Count; i++)
+        {
+            _branchButtons[i].gameObject.SetActive(false);
+        }
+    }
 
     // 玩家点击对话框推进下一句
     public void OnClickNext()
     {
+        if (DialogueManager.Instance.IsWaitingLoopChoice)
+        {
+            DialogueManager.Instance.DisplayNextLine();
+         return;
+       }
+
+        for (int i = 0; i < _branchButtons.Count; i++)
+        {
+            if (_branchButtons[i].gameObject.activeSelf)
+               return;
+        }
+
         DialogueManager.Instance.DisplayNextLine();
     }
 
@@ -103,9 +186,9 @@ public class UIManager: MonoBehaviour
     }
     public void Close()
     {
-        computerPanel.SetActive(false);
+         computerPanel.SetActive(false);
          Cursor.lockState = CursorLockMode.None;
-    Cursor.visible = false;
+         Cursor.visible = false;
 
     }
 }

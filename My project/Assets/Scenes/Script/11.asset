@@ -10,8 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97d36a54e6f6a4c8fa5e054a8bdbd8ed, type: 3}
-  m_Name: 222
+  m_Name: 11
   m_EditorClassIdentifier: 
-  lines:
-  - name: she
-    content: 22
+  lines: []
