@@ -5,18 +5,13 @@ using UnityEngine;
 public class Doors : Interactable
 {
     [SerializeField] private Animator doorAnimator;
-    private bool opened = false;
+    private bool isOpen = false;
 
     public override void OnInteract()
     {
-        if (opened) return;
-
         base.OnInteract();
 
-        if (doorAnimator != null)
-        {
-            doorAnimator.SetTrigger("OpenDoor");
-            opened = true;
-        }
+        isOpen = !isOpen;
+        doorAnimator.SetBool("IsOpen", isOpen);
     }
 }
