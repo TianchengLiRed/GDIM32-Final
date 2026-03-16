@@ -3,16 +3,18 @@ using UnityEngine;
 public class RestroomDoor : Interactable
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private bool isOpened = false;
+    [SerializeField] private bool isOpen = false;
     [SerializeField] private GameObject FinalPanel;
 
     public override void OnInteract()
     {
-        if (isOpened) return;
+        if (isOpen) return;
 
         if (TaskManager.Instance != null && TaskManager.Instance.OpentheDoor)
         {
-            
+            isOpen = !isOpen;
+            animator.SetBool("IsOpen", isOpen);
+
         }
         else
         {
