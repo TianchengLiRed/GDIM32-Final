@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class Door : Interactable
+public class RestroomDoor : Interactable
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private string openTriggerName = "Open";
     [SerializeField] private bool isOpened = false;
     [SerializeField] private GameObject FinalPanel;
 
@@ -13,7 +12,7 @@ public class Door : Interactable
 
         if (TaskManager.Instance != null && TaskManager.Instance.OpentheDoor)
         {
-            OpenDoor();
+            
         }
         else
         {

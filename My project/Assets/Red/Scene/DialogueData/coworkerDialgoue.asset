@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d36a54e6f6a4c8fa5e054a8bdbd8ed, type: 3}
+  m_Name: coworkerDialgoue
+  m_EditorClassIdentifier: 
+  lines:
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: Oh hey! Perfect timing. I was just thinking about looking for you.
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: "Actually, to be honest, I\u2019ve been thinking about a lot of things
+      today. Too many things, really."
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: "You ever have one of those days where you start doing something, then
+      you remember three other things you were supposed to do, and suddenly you\u2019re
+      not doing any of them?"
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: "Yeah\u2026 that\u2019s been my entire morning."
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: "Anyway, I was trying to sort out those files the boss asked about.
+      You know, the ones from last week? Or maybe it was the week before\u2026 time
+      kind of blends together around here."
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: "But then the computer froze. Not crashed, just\u2026 froze. Like it
+      decided it needed a moment to think about life."
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: So I restarted it. Twice.
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: "Then I realized the problem wasn\u2019t the computer."
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: It was me.
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: I forgot to plug in the network cable.
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: coworker
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: "Which is honestly embarrassing, but at least now everything\u2019s
+      working again."
+    replyOptions:
+    - Can we get to the point?
+    - What does this have to do with my task?
+    replyBranches:
+    - {fileID: 11400000, guid: 5f6e1523e162f482f89a93462d09aa16, type: 2}
+    - {fileID: 11400000, guid: b281d3aa5d69640bd920ffe661c3c6c7, type: 2}
+    loopQuestion: 0

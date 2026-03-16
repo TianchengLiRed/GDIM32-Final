@@ -19,6 +19,9 @@ public class TaskManager : MonoBehaviour
         }
     }
     [SerializeField] private GameObject ChoicePanel;
+    [SerializeField] private DialogueData yesDialogue;
+    [SerializeField] private DialogueData moreDialogue;
+
 
     private List<TaskData> activeTasks = new List<TaskData>();
 
@@ -134,6 +137,7 @@ public void AcceptYes()
     Debug.Log("Accepted Yes");
     AcceptMainTask(3);
     ChoicePanel.SetActive(false);
+    DialogueManager.Instance.StartDialogue(yesDialogue);
 }
 
 public void AcceptMore()
@@ -142,6 +146,7 @@ public void AcceptMore()
     Debug.Log("Accepted More");
     AcceptMainTask(5);
     ChoicePanel.SetActive(false);
+    DialogueManager.Instance.StartDialogue(moreDialogue);
 }
 
 public void OnEndClicked()

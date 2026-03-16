@@ -10,27 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97d36a54e6f6a4c8fa5e054a8bdbd8ed, type: 3}
-  m_Name: NewDialogue
+  m_Name: coworkerBranch1
   m_EditorClassIdentifier: 
   lines:
-  - speakerName: grksjbglagpag
+  - speakerName: coworker
     portrait: {fileID: 0}
     voiceClip: {fileID: 0}
-    content: ghioehofhqhe
+    content: Right. Straight to business. Fair enough.
     replyOptions: []
     replyBranches: []
     loopQuestion: 0
-  - speakerName: grksjbglagpag
+  - speakerName: coworker
     portrait: {fileID: 0}
     voiceClip: {fileID: 0}
-    content: mcmcmc
-    replyOptions: []
-    replyBranches: []
-    loopQuestion: 0
-  - speakerName: grksjbglagpag
-    portrait: {fileID: 0}
-    voiceClip: {fileID: 0}
-    content: afaofafibeaoifna
+    content: This is what the boss asked me to give you.
     replyOptions: []
     replyBranches: []
     loopQuestion: 0

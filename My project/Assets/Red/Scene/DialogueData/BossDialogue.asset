@@ -10,33 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97d36a54e6f6a4c8fa5e054a8bdbd8ed, type: 3}
-  m_Name: 1
+  m_Name: BossDialogue
   m_EditorClassIdentifier: 
   lines:
-  - speakerName: aa
+  - speakerName: Boss
     portrait: {fileID: 0}
     voiceClip: {fileID: 0}
-    content: fseaopfhpseighhgpwo
+    content: "Ah, there you are. I\u2019ve been waiting for you."
     replyOptions: []
     replyBranches: []
     loopQuestion: 0
-  - speakerName: aa
+  - speakerName: Boss
     portrait: {fileID: 0}
     voiceClip: {fileID: 0}
-    content: rwihgowhpiwhf
-    replyOptions: []
-    replyBranches: []
-    loopQuestion: 0
-  - speakerName: 
-    portrait: {fileID: 0}
-    voiceClip: {fileID: 0}
-    content: nshgpihwrgeiqhpo?
+    content: "There\u2019s work to be done, and not much time to waste."
     replyOptions:
-    - 
-    - 
-    - 
+    - What do you need?
+    - That depends. How bad is it?
     replyBranches:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    loopQuestion: 1
+    - {fileID: 11400000, guid: f184f0343ad7b4ac783d811a4dd4d667, type: 2}
+    - {fileID: 11400000, guid: d0d3a6095601842878bc7047927dac30, type: 2}
+    loopQuestion: 0

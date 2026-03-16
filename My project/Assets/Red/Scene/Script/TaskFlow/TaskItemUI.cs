@@ -36,12 +36,12 @@ public class TaskItemUI : MonoBehaviour
         if (completed)
         {
             taskText.text = "[✓] " + originalText;
-            taskText.color = Color.gray;
+            taskText.color = Color.green;
         }
         else
         {
             taskText.text = "[ ] " + originalText;
-            taskText.color = Color.white;
+            taskText.color = Color.black;
         }
     }
 }
