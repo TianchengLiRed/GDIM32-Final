@@ -10,7 +10,7 @@ public class Computer: Interactable
         base.OnInteract();
         Debug.Log("computer");
 
-        UIManager.Instance.OpenComputerPanel();
+        //UIManager.Instance.OpenComputerPanel();
         AudioManager.Instance.PlayerComputer();
 
         // 比如：UIManager.Instance.ShowDialogue(noteContent);

@@ -28,7 +28,7 @@ public class Boss : LookAtPlayerInteractable
         if (myDialogue != null)
         {
             introDialoguePlayed = true;
-            DialogueManager.Instance.StartDialogue(myDialogue, ShowChoice);
+            //DialogueManager.Instance.StartDialogue(myDialogue, ShowChoice);
         }
     }
 
