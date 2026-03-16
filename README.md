@@ -83,8 +83,10 @@ Looking back at our Proposal and W7 breakdown, it was actually very helpful for 
 
 ## Final Submission
 ### Group Devlog
-Put your group Devlog here.
-
+For our final project, the three design patterns that helped us the most were Singleton, Observer, and Inheritance. I honestly didn’t really think about design patterns much at the start, but while working on the game, it became pretty obvious that they were helping keep everything organized. Since our project has dialogue, tasks, audio, UI, and a lot of interactable objects, these patterns made the code way less chaotic.
+The first one we used a lot was the Singleton pattern. We have this in scripts like DialogueManager.cs, AudioManager.cs, and TaskFlowManager.cs. These are all systems where it only really makes sense to have one main manager running the game logic. For example, in Coffee.cs, when the player drinks coffee, it talks directly to the timer, audio, and task flow managers through their Instance. That was useful because any script could access those systems without us having to constantly pass references around. It also made things easier to manage since we always knew where the main logic for those systems lived.
+The second pattern was Observer, mostly through events. In DialogueManager.cs, there are events like OnLineStarted, OnDialogueEnded, and OnDialogueReplied. Then DialogueUI.cs listens for those events and updates the dialogue box, choices, and text on screen. I think this helped a lot because the dialogue system doesn’t need to directly control the UI every second. It just sends out an event, and the UI responds to it. That made the code feel cleaner and more separated, which was nice once the dialogue system started getting more complicated.
+The third pattern was Inheritance with our interactable objects. We have a base class in Interactable.cs, and that script handles the shared interaction features like prompts, highlighting, and the base OnInteract() function. Then scripts like Coffee.cs, Computer.cs, PhoneInteractable.cs, Boss.cs, and NPC.cs all inherit from it and do their own version of OnInteract(). This was probably one of the most useful patterns for us, because almost everything in the game that the player can use or talk to works through the same structure. It made the code more consistent and made it easier to add new objects without rewriting the whole interaction system every time.
 
 ### Team Member Name 1
 Put your individual final Devlog here.
