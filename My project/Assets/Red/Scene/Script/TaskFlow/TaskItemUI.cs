@@ -1,0 +1,47 @@
+using TMPro;
+using UnityEngine;
+
+public enum TaskType
+{
+    None,
+    CheckComputer,
+    TalkBoatman,
+    VisitDock,
+    TalkDrugDealer,
+    CheckApartment,
+    ReadRecord
+}
+public class TaskItemUI : MonoBehaviour
+{
+    [SerializeField] private TextMeshProUGUI taskText;
+
+    private string originalText;
+    private bool completed;
+
+    public void Setup(string text)
+    {
+        originalText = text;
+        completed = false;
+        Refresh();
+    }
+
+    public void Complete()
+    {
+        completed = true;
+        Refresh();
+    }
+
+    private void Refresh()
+    {
+        if (completed)
+        {
+            taskText.text = "[✓] " + originalText;
+            taskText.color = Color.gray;
+        }
+        else
+        {
+            taskText.text = "[ ] " + originalText;
+            taskText.color = Color.white;
+        }
+    }
+}

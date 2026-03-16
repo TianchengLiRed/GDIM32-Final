@@ -15,17 +15,23 @@ public class DialogueManager : MonoBehaviour
     private DialogueLine _returnLine;
     private bool _waitingLoopChoice;
     public bool IsWaitingLoopChoice => _waitingLoopChoice;
+    private bool _showChoiceAfterDialogue;
     public bool IsInDialogue { get; private set; }
 
     void Awake() => Instance = this;
 
-    //对话开始
     public void StartDialogue(DialogueData data)
+    {
+        StartDialogue(data, false);
+    }
+    //对话开始
+    public void StartDialogue(DialogueData data, bool showChoiceAfterDialogue)
     {
         if (data == null) return;
         _lineQueue.Clear();//删除上次的line
         foreach (var line in data.lines) _lineQueue.Enqueue(line);//把SO的对话都放进去
         IsInDialogue = true;//进入对话true
+        _showChoiceAfterDialogue = showChoiceAfterDialogue;
         DisplayNextLine();
     }
 
@@ -80,6 +86,12 @@ public class DialogueManager : MonoBehaviour
         IsInDialogue = false;
         OnDialogueEnded?.Invoke();//事件end通知
         Debug.Log("对话结束");
+        if (_showChoiceAfterDialogue)
+        {
+            _showChoiceAfterDialogue = false;
+            TaskManager.Instance.ShowChoice();
+            
+        }
     }
 
     private void ShowReplyOption()
