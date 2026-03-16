@@ -4,11 +4,20 @@ public class Boss : LookAtPlayerInteractable
 {
     [SerializeField] private Animator Animator;
     [SerializeField] private DialogueData bossDialogue;
+    [SerializeField] private DialogueData completeDialogue;
     public override void OnInteract()
     {
         base.OnInteract();
         Animator.SetBool("Istalking", true);
-        DialogueManager.Instance.StartDialogue(bossDialogue, true);
+        if (TaskManager.Instance.AllTasksCompleted)
+        {
+            DialogueManager.Instance.StartDialogue(completeDialogue, false);
+            TaskManager.Instance.OpentheDoor = true;
+        }
+        else
+        {
+            DialogueManager.Instance.StartDialogue(bossDialogue, true);
+        }
     }
 
     private void ShowChoice()
@@ -22,4 +31,5 @@ public class Boss : LookAtPlayerInteractable
     {
         Animator.SetBool("istalking", false);
     }
+    
 }

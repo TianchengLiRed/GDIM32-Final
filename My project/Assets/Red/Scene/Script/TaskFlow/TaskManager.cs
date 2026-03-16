@@ -24,6 +24,7 @@ public class TaskManager : MonoBehaviour
 
     public bool HasAcceptedTask { get; private set; }
     public bool AllTasksCompleted { get; private set; }
+    public bool OpentheDoor = false;
 
     private List<TaskType> allPossibleTasks = new List<TaskType>()
     {

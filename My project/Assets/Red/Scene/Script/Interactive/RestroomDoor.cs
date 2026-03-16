@@ -11,27 +11,13 @@ public class Door : Interactable
     {
         if (isOpened) return;
 
-        if (TaskManager.Instance != null && TaskManager.Instance.AllTasksCompleted)
+        if (TaskManager.Instance != null && TaskManager.Instance.OpentheDoor)
         {
             OpenDoor();
         }
         else
         {
-            Debug.Log("The door won't open yet. Finish all tasks first.");
-            // 这里也可以放提示UI或音效
+            
         }
-    }
-
-    private void OpenDoor()
-    {
-        isOpened = true;
-
-        if (animator != null)
-        {
-            animator.SetTrigger(openTriggerName);
-        }
-        FinalPanel.SetActive(true);
-
-        Debug.Log("Door opened.");
     }
 }
