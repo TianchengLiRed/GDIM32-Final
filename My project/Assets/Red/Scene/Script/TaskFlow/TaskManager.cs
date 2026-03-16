@@ -79,12 +79,12 @@ public class TaskManager : MonoBehaviour
     {
         switch (type)
         {
-            case TaskType.CheckComputer: return "Check the computer";
-            case TaskType.TalkBoatman: return "Talk to the boatman";
-            case TaskType.VisitDock: return "Go to the dock";
-            case TaskType.TalkDrugDealer: return "Talk to the drug dealer";
-            case TaskType.CheckApartment: return "Investigate the apartment";
-            case TaskType.ReadRecord: return "Read the voyage records";
+            case TaskType.CheckComputer: return "Check the email";
+            case TaskType.TalkBoatman: return "take the phone";
+            case TaskType.VisitDock: return "talk with your coworker";
+            case TaskType.TalkDrugDealer: return "finish the form";
+            case TaskType.CheckApartment: return "use printer";
+            case TaskType.ReadRecord: return "111";
         }
 
         return "未知任务";
@@ -141,5 +141,10 @@ public void AcceptMore()
     Debug.Log("Accepted More");
     AcceptMainTask(5);
     ChoicePanel.SetActive(false);
+}
+
+public void OnEndClicked()
+{
+    Application.Quit();
 }
 }
