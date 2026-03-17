@@ -27,6 +27,7 @@ public class DialogueManager : MonoBehaviour
     //对话开始
     public void StartDialogue(DialogueData data, bool showChoiceAfterDialogue)
     {
+        ShowCursor();
         if (data == null) return;
         _lineQueue.Clear();//删除上次的line
         foreach (var line in data.lines) _lineQueue.Enqueue(line);//把SO的对话都放进去
@@ -117,6 +118,7 @@ public class DialogueManager : MonoBehaviour
             }
 
             EndDialogue();
+            Debug.Log("对话结束鼠标");
             return;
         }
 
@@ -127,5 +129,17 @@ public class DialogueManager : MonoBehaviour
 
         _waitingLoopChoice = false;
         DisplayNextLine();
+
+    }
+    private void ShowCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    private void HideCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
+

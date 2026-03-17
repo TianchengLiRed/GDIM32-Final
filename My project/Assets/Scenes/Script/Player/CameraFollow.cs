@@ -18,6 +18,7 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         sensitivity = Mathf.Clamp(sensitivity, minSensitivity, maxSensitivity);
         //if (lockCursor)
         //{
