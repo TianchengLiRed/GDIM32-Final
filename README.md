@@ -118,6 +118,9 @@ I implemented different dialogue for the boss across various states using if sta
 
 I  rewrote and integrated the logic for various interactive objects.
 
+### Integration
+Overall, during the finalization phase, I created a new scene from scratch. I overhauled and interconnected nearly all of the scripts, fixed potential bugs, and streamlined cumbersome code logic to ensure the game functions correctly; ultimately, I completed the entire game flow within this new scene.
+
 ### Team Member Name 3
 Put your individual final Devlog here.
 
