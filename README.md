@@ -149,6 +149,6 @@ In addition to my main tasks, I also helped coordinate and follow up on differen
 
  - [Background Music](https://pixabay.com/zh/music/upbeat-music-10468/?utm_source=chatgpt.com) - Background Music
 
- - [Sound Effect](https://pixabay.com/sound-effects/film-special-effects-weird-alien-talking-102375/) Talking
- -
+ - [Sound Effect](https://pixabay.com/sound-effects/film-special-effects-weird-alien-talking-102375/) Talking Sound effect
+
  - [Sound Effect](https://freesound.org/) - Sound Effect of drinking, footsteps, keyboard, doorknock, phonerings
