@@ -88,8 +88,18 @@ The first one we used a lot was the Singleton pattern. We have this in scripts l
 The second pattern was Observer, mostly through events. In DialogueManager.cs, there are events like OnLineStarted, OnDialogueEnded, and OnDialogueReplied. Then DialogueUI.cs listens for those events and updates the dialogue box, choices, and text on screen. I think this helped a lot because the dialogue system doesn’t need to directly control the UI every second. It just sends out an event, and the UI responds to it. That made the code feel cleaner and more separated, which was nice once the dialogue system started getting more complicated.
 The third pattern was Inheritance with our interactable objects. We have a base class in Interactable.cs, and that script handles the shared interaction features like prompts, highlighting, and the base OnInteract() function. Then scripts like Coffee.cs, Computer.cs, PhoneInteractable.cs, Boss.cs, and NPC.cs all inherit from it and do their own version of OnInteract(). This was probably one of the most useful patterns for us, because almost everything in the game that the player can use or talk to works through the same structure. It made the code more consistent and made it easier to add new objects without rewriting the whole interaction system every time.
 
-### Team Member Name 1
-Put your individual final Devlog here.
+### Allen Hu
+#### Phone call system
+Since the check-in, one of the main things I worked on was the phone call system. A lot of that work is in PhoneInteractable.cs. I worked on the variables and logic for how the phone task runs, like autoStartOnTaskChoice, requiredAnsweredCalls, firstCallDelay, callIntervalRange, and ringDuration. I also wrote methods like StartPhoneTask(), StopPhoneTask(), OnInteract(), CallLoop(), and RingWindow() to control when the phone rings, how long it rings, and what happens if the player answers or misses the call. I also set up Unity events like onCallStarted, onCallMissed, onCallAnswered, and onTaskCompleted, which made it easier to connect the phone system to the rest of the game. I think this was one of my biggest contributions because it made the phone feel like a real gameplay mechanic instead of just a one-time interaction.
+
+#### Task flow and objective guidance
+Another part I worked on was the task flow system, especially the objective and task check side. A lot of that is in TaskFlowManager.cs. I helped with methods like BeginCoffeeStep(), OnCoffeeDrank(), SetObjective(), ClearObjective(), and NotifyInteracted(). These methods help track whether the player has finished an important step and whether the game should still be guiding them toward an objective. I also helped with the on-screen prompt and arrow so the player can more clearly tell what they need to do next instead of just guessing.
+
+#### Interaction and progression checks
+I also worked on making sure interactions actually update the task system correctly. For example, in Coffee.cs, the coffee interaction calls TaskFlowManager.Instance.OnCoffeeDrank(), and in the base Interactable.cs, it calls NotifyTaskObjectiveInteracted() so the game can recognize when the player reaches the current objective. That part was important because without those checks, the progression system would not really work and the game would not know when the player had completed something.
+
+#### Team support
+Besides the parts I directly worked on, I also helped out in a lot of places when there's bugs. Because of that, some of my contribution is spread across different parts of the project instead of only showing up in one feature. There are a lot of places in the code where I helped fix logic, adjust systems, or connect different parts so they would work together better.
 ### Team Member Name 2
 Put your individual final Devlog here.
 ### Team Member Name 3
