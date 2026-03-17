@@ -16,7 +16,7 @@ public class Coffee : Interactable
             AudioManager.Instance.PlayerDrink();
 
         if (TimerManager.Instance != null)
-            TimerManager.Instance.StartTimer(300);
+            TimerManager.Instance.StartTimer(150);
 
         if (TaskManager.Instance != null)
             TaskManager.Instance.StartPendingTask();

@@ -6,11 +6,14 @@ public class TimerManager : MonoBehaviour
 
     public float timeRemaining;
     private bool isRunning = false;
+    private GUIStyle timerStyle;
 
     [SerializeField]private GameObject endPanel;
 
     private void Awake()
     {
+        timerStyle = new GUIStyle();
+        timerStyle.fontSize = 40;
         Instance = this;
         endPanel.SetActive(false);
     }
@@ -48,7 +51,7 @@ public class TimerManager : MonoBehaviour
         int totalSeconds = Mathf.CeilToInt(timeRemaining);
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
-        GUI.Box(new Rect(12, 12, 120, 32), $"Time {minutes:00}:{seconds:00}");
+        GUI.Box(new Rect(20, 20, 260, 80), $"Time {minutes:00}:{seconds:00}", timerStyle);
     }
 }
 
