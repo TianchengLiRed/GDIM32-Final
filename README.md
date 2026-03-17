@@ -100,8 +100,20 @@ I also worked on making sure interactions actually update the task system correc
 
 #### Team support
 Besides the parts I directly worked on, I also helped out in a lot of places when there's bugs. Because of that, some of my contribution is spread across different parts of the project instead of only showing up in one feature. There are a lot of places in the code where I helped fix logic, adjust systems, or connect different parts so they would work together better.
-### Team Member Name 2
-Put your individual final Devlog here.
+### Tiancheng Li
+
+#### Dialogue
+After checking in, I rewrote the logic of the DialogueManager, changed it from a method-based branching dialogue system to a nested ScriptableObject-based structure. I rewrote DialogueData.cs to add reply options and reply branches.The DisplayNextOne() function now includes checks for the reply and boolean loopQuestion for each dialogue. Two new method, ShowReplyOption() calls UI for reply by event. SelectReply(int index) calls the corresponding dialogue based on the player's response.TypeText(string content)implemented a typewriter effect.ShowChoice(DialogueLine line)Implement the display of the corresponding number of reply buttons and send information to the system based on the button that was pressed.The UI and system scripts are connected through new OnLineReplied events.
+
+#### Task, GameFlow update
+I created new scripts, TaskManager TaskItemUI, TaskListUI, to control the overall game task flow.TaskManagerThe TaskManager is responsible for managing overall task-related functionality. It utilizes enums and classes to define various task categories. The AcceptMainTask() method calls GenerateRandomTasks(int count) to generate a specified number of random tasks; GetTaskText(TaskType type) handles synchronization with the user interface; CompleteTask(TaskType type) executes the task completion logic following user interaction; and CheckAllTasksCompleted() is responsible for verifying whether the game's completion conditions have been met.Collectively, they implement the in-game workflow for accepting, submitting, and completing quests.Furthermore, UI changes—such as those occurring after accepting or completing a task—are synchronized via the ShowTasks() method in TaskListUI and the refresh method in TaskItemUI.
+
+#### Other Updates and Optimizations
+I also refactored the PlayerController into a Finite State Machine, utilizing if statements within UpdateState() to switch between different states and manage a series of associated changes—such as temporarily disabling movement while in the "interaction" state.
+The game's initial interface has been created; utilizing the StartGame() and FadeIn() methods within MainMenu.cs, it simulates an email sequence and enables the game to start upon clicking any button.
+I implemented different dialogue for the boss across various states using if statements.
+I  rewrote and integrated the logic for various interactive objects.
+
 ### Team Member Name 3
 Put your individual final Devlog here.
 
