@@ -13,6 +13,7 @@ public class PrinterInteractable : Interactable
     {
         printerAnimator.SetTrigger("Print");
         TaskManager.Instance.CompleteTask(TaskType.PrintReport);
+        AudioManager.Instance.PlayerPrinter();
 
 
     }

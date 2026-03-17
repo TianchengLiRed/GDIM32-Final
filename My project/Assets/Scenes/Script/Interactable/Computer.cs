@@ -29,10 +29,12 @@ public class Computer: Interactable
     public void emailComplete()
     {
         TaskManager.Instance.CompleteTask(TaskType.FinishEmail);
+        AudioManager.Instance.PlayerComputer();
     }
 
     public void formComplete()
     {
         TaskManager.Instance.CompleteTask(TaskType.FinishForm);
+        AudioManager.Instance.PlayerComputer();
     }
 }

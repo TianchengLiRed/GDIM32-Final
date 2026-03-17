@@ -10,6 +10,7 @@ public class Boss : LookAtPlayerInteractable
     {
         base.OnInteract();
         Animator.SetBool("Istalking", true);
+        AudioManager.Instance.PlayerTalk();
          if (!TaskManager.Instance.HasAcceptedTask)
         {
             // 还没接任务

@@ -5,9 +5,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [Header("Button Sounds")]
-    public AudioClip clickSound;
-    public AudioClip hoverSound;
+  [Header("BGM")]
+    public AudioClip bgmMusic;
 
     [Header("Game Sounds")]
     public AudioClip moveSound;
@@ -16,9 +15,12 @@ public class AudioManager : MonoBehaviour
     public AudioClip printerSound;
     public AudioClip phoneSound;
     public AudioClip shitSound;
+    public AudioClip doorSound;
+    public AudioClip TalkSound;
 
     public AudioSource sourceSFX;
     public AudioSource sourceBGM;
+
 
     private void Awake()
     {
@@ -38,6 +40,20 @@ public class AudioManager : MonoBehaviour
         sourceBGM.playOnAwake = false;
     }
 
+    private void Start()
+    {
+        PlayBGM();   // 游戏开始自动播放BGM
+    }
+
+    // 播放BGM（循环）
+    public void PlayBGM()
+    {
+        if (bgmMusic == null) return;
+
+        sourceBGM.clip = bgmMusic;
+        sourceBGM.loop = true;
+        sourceBGM.Play();
+    } 
     public void PlaySound(AudioClip clip, float volume = 1f)
     {
         if (clip != null)
@@ -46,15 +62,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayClick()
-    {
-        PlaySound(clickSound);
-    }
-
-    public void PlayHover()
-    {
-        PlaySound(hoverSound);
-    }
 
     public void PlayerMove()
     {
@@ -85,4 +92,9 @@ public class AudioManager : MonoBehaviour
     {
         PlaySound(shitSound);
     }
+     public void PlayerTalk()
+    {
+        PlaySound(TalkSound);
+    }
 }
+

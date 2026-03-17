@@ -3674,7 +3674,6 @@ RectTransform:
   - {fileID: 460847824}
   - {fileID: 2102583326}
   - {fileID: 807984911}
-  - {fileID: 1223489739}
   m_Father: {fileID: 1419181788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3735,7 +3734,7 @@ MonoBehaviour:
   dialogPanel: {fileID: 197110966}
   _nameText: {fileID: 269434909}
   _contentText: {fileID: 881489353}
-  _portraitImage: {fileID: 1223489740}
+  _portraitImage: {fileID: 0}
   _branchTexts:
   - {fileID: 1061461499}
   - {fileID: 1834059974}
@@ -16127,8 +16126,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.4063263, y: 0.19050235, z: 0.38283825}
+  m_Center: {x: 0.13808632, y: -0.11955646, z: 0.30858088}
 --- !u!114 &869695956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23889,81 +23888,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2783966675330426800, guid: d0a525aa373c7b945b29bbbacabf73b2, type: 3}
   m_PrefabInstance: {fileID: 720052832}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1223489738
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1223489739}
-  - component: {fileID: 1223489741}
-  - component: {fileID: 1223489740}
-  m_Layer: 5
-  m_Name: Portrait
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1223489739
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223489738}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 197110967}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -299.55, y: 376.21}
-  m_SizeDelta: {x: 136.5856, y: 188.4152}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1223489740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223489738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1223489741
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223489738}
-  m_CullTransparentMesh: 1
 --- !u!1 &1225069584
 GameObject:
   m_ObjectHideFlags: 0
@@ -26242,14 +26166,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3615e52d413754bee8fc048b12dd2011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickSound: {fileID: 0}
-  hoverSound: {fileID: 0}
+  bgmMusic: {fileID: 8300000, guid: b17cf9b02e0a44ab0a580415cd4e652c, type: 3}
   moveSound: {fileID: 8300000, guid: 4cc4847294f74394b9a44d87b495110b, type: 3}
   drinkSound: {fileID: 8300000, guid: 18b852ba19ce7cf45aa3a2a78ad19543, type: 3}
   computerSound: {fileID: 8300000, guid: 0b75f044ef141d34490e8bef3c0ee8a7, type: 3}
   printerSound: {fileID: 8300000, guid: 07dde4f770f7a0049868eab62c8edbbd, type: 3}
   phoneSound: {fileID: 8300000, guid: 2e028e99d35c3234a9113376266968eb, type: 3}
-  shitSound: {fileID: 0}
+  shitSound: {fileID: 8300000, guid: df4808f8d5a3dd94bb71d9f361672b23, type: 3}
+  doorSound: {fileID: 0}
+  TalkSound: {fileID: 8300000, guid: 6ed191c1455df4e3aabd27edaccd1432, type: 3}
   sourceSFX: {fileID: 1795299305}
   sourceBGM: {fileID: 1312335184}
 --- !u!82 &1312335184
@@ -26262,7 +26187,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b17cf9b02e0a44ab0a580415cd4e652c, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

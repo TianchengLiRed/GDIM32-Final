@@ -86,9 +86,9 @@ public class TaskManager : MonoBehaviour
         {
             case TaskType.TakeTelephone: return "take the telephone";
             case TaskType.TalkWithCoworker: return "talk with your coworker";
-            case TaskType.FinishForm: return "finish the form";
-            case TaskType.PrintReport: return "print the report";
-            case TaskType.FinishEmail: return "send the email";
+            case TaskType.FinishForm: return "finish the form on the computer";
+            case TaskType.PrintReport: return "print the report on the printer";
+            case TaskType.FinishEmail: return "send the email on the computer";
             case TaskType.CheckNotes: return "check your notes";
         }
 

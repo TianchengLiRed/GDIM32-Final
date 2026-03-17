@@ -49,7 +49,6 @@ public class DialogueUI : MonoBehaviour
         dialogPanel.SetActive(true);
         _nameText.text = line.speakerName;
         ShowText(line.content);
-        _portraitImage.sprite = line.portrait;
 
         for (int i = 0; i < _branchButtons.Count; i++)
         {

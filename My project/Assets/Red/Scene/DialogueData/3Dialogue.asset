@@ -32,7 +32,7 @@ MonoBehaviour:
     portrait: {fileID: 0}
     voiceClip: {fileID: 0}
     content: Drink this coffee and go to work.You can only go to the bathroom after
-      you have finished all your tasks!
+      you have finished all your tasks! Remeber to complete the tasks in order.
     replyOptions: []
     replyBranches: []
     loopQuestion: 0

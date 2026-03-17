@@ -230,11 +230,6 @@ public class PlayerController : MonoBehaviour
 
         currentInteractable.OnInteract();
 
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlayClick();
-        }
-
     // 交互完成后，再切回 Idle 或其他状态
     StartCoroutine(EndInteraction(3));
 }

@@ -10,6 +10,7 @@ public class Coffee : Interactable
 
         base.OnInteract();
         hasDrankCoffee = true;
+        AudioManager.Instance.PlayerDrink();
 
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlayerDrink();
