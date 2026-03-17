@@ -135,3 +135,7 @@ Put your individual final Devlog here.
  - [Businessmen Pack with Props v2.0](https://assetstore.unity.com/packages/3d/characters/humanoids/humans/businessmen-pack-with-props-v2-0-236156) - Player, Boss, Co-worker Sprites
 
  - [Background Music](https://pixabay.com/zh/music/upbeat-music-10468/?utm_source=chatgpt.com) - Background Music
+
+ - [Sound Effect](https://pixabay.com/sound-effects/film-special-effects-weird-alien-talking-102375/) Talking
+ -
+ - [Sound Effect](https://freesound.org/) - Sound Effect of drinking, footsteps, keyboard, doorknock, phonerings
