@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
     [Header("Look Settings")]
     [SerializeField] private float minSensitivity = 50f;
     [SerializeField] private float maxSensitivity = 400f;
-    [SerializeField] private float sensitivity = 180f;
+    [SerializeField] private float sensitivity = 100f;
     [SerializeField] private float lookSmoothTime = 0.03f;
     //[SerializeField] private bool lockCursor = true;
     public Transform player;

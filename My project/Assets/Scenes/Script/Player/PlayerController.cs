@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour
         currentInteractable.OnInteract();
 
     // 交互完成后，再切回 Idle 或其他状态
-    StartCoroutine(EndInteraction(3));
+    StartCoroutine(EndInteraction(2f));
 }
 
 private IEnumerator EndInteraction(float duration)
