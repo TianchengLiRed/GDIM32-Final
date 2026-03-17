@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class Computer: Interactable
 {
+    [SerializeField] private GameObject ComputerPanel;
+    public void Start()
+    {
+        ComputerPanel.SetActive(false);
+    }
      public override void OnInteract()
     {
         // 先保留父类的日志（可选）
         base.OnInteract();
         Debug.Log("computer");
 
-        //UIManager.Instance.OpenComputerPanel();
         AudioManager.Instance.PlayerComputer();
+        ComputerPanel.SetActive(true);
+    }
 
-        // 比如：UIManager.Instance.ShowDialogue(noteContent);
+    public void CloseComputerPanel()
+    {
+        ComputerPanel.SetActive(false);
+    }
+
+    public void emailComplete()
+    {
+        TaskManager.Instance.CompleteTask(TaskType.FinishEmail);
+    }
+
+    public void formComplete()
+    {
+        TaskManager.Instance.CompleteTask(TaskType.FinishForm);
     }
 }

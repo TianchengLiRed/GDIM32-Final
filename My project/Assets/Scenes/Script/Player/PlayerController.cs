@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask interactLayer;
     [SerializeField] private float detectRange = 3f;//检测范围
     private Interactable currentInteractable;
-/*
+
     [Header("GUI Prompt")]
     [SerializeField] private Vector2 guiPromptSize = new Vector2(380f, 78f);
     [SerializeField] private Vector2 guiPromptOffset = new Vector2(0f, -80f);
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Color guiPromptBorderColor = new Color(1f, 0.9f, 0.2f, 0.95f);
     [SerializeField] private float guiPromptPulseSpeed = 3f;
     [SerializeField] private float guiPromptPulseStrength = 0.25f;
-*/
+
 
     private Rigidbody rb;
     private Animator animator;
@@ -247,7 +247,7 @@ private IEnumerator EndInteraction(float duration)
 
 
 
-/*
+
     private void OnGUI()
     {
         if (currentInteractable == null) return;
@@ -334,5 +334,5 @@ private IEnumerator EndInteraction(float duration)
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectRange);
     }
-*/
+
 }

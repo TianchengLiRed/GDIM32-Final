@@ -3,14 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
-    
-    // 单例实例
     public static AudioManager Instance;
 
     [Header("Button Sounds")]
-    // private AudioSource audioSource;
     public AudioClip clickSound;
     public AudioClip hoverSound;
+
+    [Header("Game Sounds")]
     public AudioClip moveSound;
     public AudioClip drinkSound;
     public AudioClip computerSound;
@@ -23,11 +22,9 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        // 确保场景中只有一个 AudioManager
         if (Instance == null)
         {
             Instance = this;
-
             transform.SetParent(null);
             DontDestroyOnLoad(gameObject);
         }
@@ -39,12 +36,8 @@ public class AudioManager : MonoBehaviour
 
         sourceSFX.playOnAwake = false;
         sourceBGM.playOnAwake = false;
-
-        // Load saved audio settings when switch scenes
-        // LoadAudioSettings();
     }
 
-    // 提供一个通用的播放接口
     public void PlaySound(AudioClip clip, float volume = 1f)
     {
         if (clip != null)
@@ -55,51 +48,41 @@ public class AudioManager : MonoBehaviour
 
     public void PlayClick()
     {
-        if (clickSound != null)
-            sourceSFX.PlayOneShot(clickSound);
+        PlaySound(clickSound);
     }
 
     public void PlayHover()
     {
-        if (hoverSound != null)
-            sourceSFX.PlayOneShot(hoverSound);
+        PlaySound(hoverSound);
     }
 
     public void PlayerMove()
     {
-        if (clickSound != null)
-            sourceSFX.PlayOneShot(moveSound);
-
+        PlaySound(moveSound);
     }
+
     public void PlayerDrink()
     {
-         if (clickSound != null)
-            sourceSFX.PlayOneShot(drinkSound);
-
+        PlaySound(drinkSound);
     }
+
     public void PlayerComputer()
     {
-        if (clickSound != null)
-            sourceSFX.PlayOneShot(computerSound);
-
+        PlaySound(computerSound);
     }
+
     public void PlayerTelephone()
     {
-        if (clickSound != null)
-            sourceSFX.PlayOneShot(phoneSound);
-
+        PlaySound(phoneSound);
     }
+
     public void PlayerPrinter()
     {
-        if (clickSound != null)
-            sourceSFX.PlayOneShot(printerSound);
-
+        PlaySound(printerSound);
     }
+
     public void PlayerShit()
     {
-        if (clickSound != null)
-            sourceSFX.PlayOneShot(shitSound);
-
+        PlaySound(shitSound);
     }
 }
-

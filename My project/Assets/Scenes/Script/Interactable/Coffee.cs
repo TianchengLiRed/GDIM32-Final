@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Coffee : Interactable
@@ -12,12 +10,14 @@ public class Coffee : Interactable
 
         base.OnInteract();
         hasDrankCoffee = true;
-        TimerManager.Instance.StartTimer(30);
-        AudioManager.Instance.PlayerDrink();
-        if (TaskFlowManager.Instance != null)
-        {
-            TaskFlowManager.Instance.OnCoffeeDrank();
-        }
 
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayerDrink();
+
+        if (TimerManager.Instance != null)
+            TimerManager.Instance.StartTimer(300);
+
+        if (TaskManager.Instance != null)
+            TaskManager.Instance.StartPendingTask();
     }
 }

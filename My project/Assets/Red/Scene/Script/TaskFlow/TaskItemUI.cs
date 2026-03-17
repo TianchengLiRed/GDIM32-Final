@@ -4,12 +4,12 @@ using UnityEngine;
 public enum TaskType
 {
     None,
-    CheckComputer,
-    TalkBoatman,
-    VisitDock,
-    TalkDrugDealer,
-    CheckApartment,
-    ReadRecord
+    FinishEmail,
+    FinishForm,
+    TalkWithCoworker,
+    PrintReport,
+    CheckNotes,
+    TakeTelephone
 }
 public class TaskItemUI : MonoBehaviour
 {

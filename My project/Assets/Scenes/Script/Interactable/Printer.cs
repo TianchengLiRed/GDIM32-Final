@@ -12,6 +12,9 @@ public class PrinterInteractable : Interactable
     public override void OnInteract()
     {
         printerAnimator.SetTrigger("Print");
+        TaskManager.Instance.CompleteTask(TaskType.PrintReport);
+
+
     }
 
     public void SpawnPaper()

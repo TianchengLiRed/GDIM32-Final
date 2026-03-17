@@ -7,9 +7,12 @@ public class TimerManager : MonoBehaviour
     public float timeRemaining;
     private bool isRunning = false;
 
+    [SerializeField]private GameObject endPanel;
+
     private void Awake()
     {
         Instance = this;
+        endPanel.SetActive(false);
     }
 
     void Update()
@@ -23,6 +26,7 @@ public class TimerManager : MonoBehaviour
                 timeRemaining = 0;
                 isRunning = false;
                 Debug.Log("Game Over");
+                endPanel.SetActive(true);
             }
         }
     }
@@ -44,7 +48,7 @@ public class TimerManager : MonoBehaviour
         int totalSeconds = Mathf.CeilToInt(timeRemaining);
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
-        GUI.Box(new Rect(12, 12, 120, 32), $"时间 {minutes:00}:{seconds:00}");
+        GUI.Box(new Rect(12, 12, 120, 32), $"Time {minutes:00}:{seconds:00}");
     }
 }
 

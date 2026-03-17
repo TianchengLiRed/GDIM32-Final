@@ -6,6 +6,10 @@ public class RestroomDoor : Interactable
     [SerializeField] private bool isOpen = false;
     [SerializeField] private GameObject FinalPanel;
 
+    private void Start()
+    {
+        FinalPanel.SetActive(false);
+    }
     public override void OnInteract()
     {
         if (isOpen) return;
@@ -14,6 +18,7 @@ public class RestroomDoor : Interactable
         {
             isOpen = !isOpen;
             animator.SetBool("IsOpen", isOpen);
+            FinalPanel.SetActive(true);
 
         }
         else

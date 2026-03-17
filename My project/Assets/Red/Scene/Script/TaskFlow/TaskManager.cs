@@ -4,6 +4,7 @@ using UnityEngine;
 public class TaskManager : MonoBehaviour
 {
     public static TaskManager Instance;
+    private int pendingTaskCount = 0;
 
     private class TaskData
     {
@@ -31,12 +32,12 @@ public class TaskManager : MonoBehaviour
 
     private List<TaskType> allPossibleTasks = new List<TaskType>()
     {
-        TaskType.CheckComputer,
-        TaskType.TalkBoatman,
-        TaskType.VisitDock,
-        TaskType.TalkDrugDealer,
-        TaskType.CheckApartment,
-        TaskType.ReadRecord
+        TaskType.FinishEmail,
+        TaskType.TakeTelephone,
+        TaskType.TalkWithCoworker,
+        TaskType.FinishForm,
+        TaskType.FinishEmail,
+        TaskType.CheckNotes
     };
 
     private void Awake()
@@ -83,15 +84,15 @@ public class TaskManager : MonoBehaviour
     {
         switch (type)
         {
-            case TaskType.CheckComputer: return "Check the email";
-            case TaskType.TalkBoatman: return "take the phone";
-            case TaskType.VisitDock: return "talk with your coworker";
-            case TaskType.TalkDrugDealer: return "finish the form";
-            case TaskType.CheckApartment: return "use printer";
-            case TaskType.ReadRecord: return "111";
+            case TaskType.TakeTelephone: return "take the telephone";
+            case TaskType.TalkWithCoworker: return "talk with your coworker";
+            case TaskType.FinishForm: return "finish the form";
+            case TaskType.PrintReport: return "print the report";
+            case TaskType.FinishEmail: return "send the email";
+            case TaskType.CheckNotes: return "check your notes";
         }
 
-        return "未知任务";
+        return "none";
     }
 
     public void CompleteTask(TaskType type)
@@ -133,20 +134,34 @@ public class TaskManager : MonoBehaviour
 
 public void AcceptYes()
 {
-    TaskListUI.Instance.ShowPanel();
     Debug.Log("Accepted Yes");
-    AcceptMainTask(3);
+    pendingTaskCount = 3;
     ChoicePanel.SetActive(false);
-    DialogueManager.Instance.StartDialogue(yesDialogue);
+
+    if (DialogueManager.Instance != null && yesDialogue != null)
+    {
+        DialogueManager.Instance.StartDialogue(yesDialogue);
+    }
 }
 
 public void AcceptMore()
 {
-    TaskListUI.Instance.ShowPanel();
     Debug.Log("Accepted More");
-    AcceptMainTask(5);
+    pendingTaskCount = 5;
     ChoicePanel.SetActive(false);
-    DialogueManager.Instance.StartDialogue(moreDialogue);
+
+    if (DialogueManager.Instance != null && moreDialogue != null)
+    {
+        DialogueManager.Instance.StartDialogue(moreDialogue);
+    }
+}
+
+public void StartPendingTask()
+{
+    if (HasAcceptedTask) return;
+    if (pendingTaskCount <= 0) return;
+
+    AcceptMainTask(pendingTaskCount);
 }
 
 public void OnEndClicked()

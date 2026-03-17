@@ -14,6 +14,7 @@ public class NPC : LookAtPlayerInteractable
         {
             Animator.SetBool("Istalking", true);
             DialogueManager.Instance.StartDialogue(myDialogue);
+            TaskManager.Instance.CompleteTask(TaskType.TalkWithCoworker);
         }
     }
     public void StopTalking()

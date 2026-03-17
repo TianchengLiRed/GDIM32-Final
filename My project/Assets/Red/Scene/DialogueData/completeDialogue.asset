@@ -12,4 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d36a54e6f6a4c8fa5e054a8bdbd8ed, type: 3}
   m_Name: completeDialogue
   m_EditorClassIdentifier: 
-  lines: []
+  lines:
+  - speakerName: Boss
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: You're back.
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: Boss
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: "Let me see\u2026 looks like you handled everything I asked for."
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: Boss
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: Good work.
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: Boss
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: I suppose that means you've earned a small privilege.
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0
+  - speakerName: Boss
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 0}
+    content: You can use the restroom now.
+    replyOptions: []
+    replyBranches: []
+    loopQuestion: 0

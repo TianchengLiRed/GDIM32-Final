@@ -31,7 +31,8 @@ MonoBehaviour:
   - speakerName: Boss
     portrait: {fileID: 0}
     voiceClip: {fileID: 0}
-    content: "Come back when you\u2019re done."
+    content: Drink this coffee and go to work.You can only go to the bathroom after
+      you have finished all your tasks!
     replyOptions: []
     replyBranches: []
     loopQuestion: 0
