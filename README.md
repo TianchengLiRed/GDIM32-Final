@@ -123,8 +123,21 @@ I created all the Dialogue ScriptableObjects, as well as all the text content.
 ### Integration
 Overall, during the finalization phase, I created a new scene from scratch. I overhauled and interconnected nearly all of the scripts, fixed potential bugs, and streamlined cumbersome code logic to ensure the game functions correctly; ultimately, I completed the entire game flow within this new scene.
 
-### Team Member Name 3
-Put your individual final Devlog here.
+### Yaokun Wan
+At this stage, our game is almost complete. The main remaining parts are implementing background music, sound effects, and finalizing the remaining task content. Most of the core systems, interactions, and game flow are already working properly, so the project is now in the polishing and completion phase.
+
+#### Bug Fixes: Camera and Cursor System
+Previously, we had issues with the camera and cursor behavior. The camera would sometimes feel stuck or not respond smoothly, and the mouse cursor could move outside of the game window, which broke the player’s control experience. To fix this, I implemented cursor locking so that the mouse stays within the game window during normal gameplay. In addition, I updated the cursor behavior based on player state. When the player enters dialogue (interaction state), the cursor becomes visible so they can select dialogue options. After the dialogue ends, the cursor is hidden again and control returns to the player.
+
+#### Resource
+Following our project to-do list, I gathered the sound effects needed for various interactions in the game, such as keyboard typing, printer sounds, door interactions, knocking, drinking, footsteps, and a phone ringing. After selecting these audio assets, I imported them directly into Unity and integrated them into our AudioManager system. This allows different scripts to trigger the correct sound effects through a centralized system instead of handling audio individually.
+
+#### Animation Implementation
+I was responsible for implementing several key in-game animations, especially for interactable objects like the door and printer. For the door, I set up the animation clip and connected it with the interaction system so that the door opens when the player presses the interact key, and can also be toggled closed. For the printer, I used an animation-based approach instead of a timer system. The player is locked in an interaction state while the animation plays, and the printed paper appears after the animation finishes. This makes the interaction feel more natural and visually grounded.
+
+#### Integration and Team Coordination
+In addition to my main tasks, I also helped coordinate and follow up on different parts of the project. I checked whether systems implemented by my teammates, such as task flow and interaction logic, were properly connected and functioning together. I also assisted in testing and identifying issues during integration, making sure that animations, interactions, and game logic worked consistently. Because of this, part of my contribution is distributed across multiple systems rather than being limited to a single feature.
+
 
 ## Open-Source Assets
 
