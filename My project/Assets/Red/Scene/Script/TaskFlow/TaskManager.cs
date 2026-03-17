@@ -129,6 +129,7 @@ public class TaskManager : MonoBehaviour
 
     public void ShowChoice(){
         ChoicePanel.SetActive(true);
+        DialogueManager.Instance.ShowCursor();
         
     }
 

@@ -18,11 +18,14 @@ public class Note : Interactable
         // 先保留父类的日志（可选）
         base.OnInteract();
         NotePanel.SetActive(true);
+        TaskManager.Instance.CompleteTask(TaskType.CheckNotes);
+        DialogueManager.Instance.ShowCursor();
 
     }
 
     public void CloseNotePanel()
     {
         NotePanel.SetActive(false);
+        DialogueManager.Instance.HideCursor();
     }
 }

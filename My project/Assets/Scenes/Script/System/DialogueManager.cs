@@ -87,6 +87,7 @@ public class DialogueManager : MonoBehaviour
         IsInDialogue = false;
         OnDialogueEnded?.Invoke();//事件end通知
         Debug.Log("对话结束");
+        HideCursor();
         if (_showChoiceAfterDialogue)
         {
             _showChoiceAfterDialogue = false;
@@ -131,12 +132,12 @@ public class DialogueManager : MonoBehaviour
         DisplayNextLine();
 
     }
-    private void ShowCursor()
+    public void ShowCursor()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
-    private void HideCursor()
+    public void HideCursor()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

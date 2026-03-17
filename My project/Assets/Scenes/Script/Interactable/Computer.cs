@@ -17,11 +17,13 @@ public class Computer: Interactable
 
         AudioManager.Instance.PlayerComputer();
         ComputerPanel.SetActive(true);
+        DialogueManager.Instance.ShowCursor();
     }
 
     public void CloseComputerPanel()
     {
         ComputerPanel.SetActive(false);
+        DialogueManager.Instance.HideCursor();
     }
 
     public void emailComplete()
